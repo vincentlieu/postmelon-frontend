@@ -2,18 +2,27 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
 
-const UserRegister = () => {
+function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setloginPassword] = useState("");
-  const [isCreated, setIscreated] = useState(false);
-  const [isLogin, setIslogin] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, SetErrorMessage] = useState("");
+  const [isCreated, setIscreated] = useState(false);
 
   const sendRequestToRegister = () => {
-    if (name && email && password) {
+    const letters = /^[A-Za-z]+$/;
+    if (name === "") {
+      SetErrorMessage(" Please fill out name");
+    } else if (!name.match(letters)) {
+      SetErrorMessage("Name can only be letter");
+    } else if (email === "") {
+      SetErrorMessage("Email can not be emty");
+    } else if (password === "") {
+      SetErrorMessage("Password can not be emty");
+    } else if (password !== confirmPassword) {
+      SetErrorMessage("Password does not matched");
+    } else {
       axios
         .post(
           `https://cors-anywhere.herokuapp.com/https://postmelon.herokuapp.com/api/users`,
@@ -24,70 +33,25 @@ const UserRegister = () => {
           }
         )
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
+
           setName("");
           setEmail("");
           setpassword("");
           setIscreated(true);
-          SetErrorMessage("");
+        })
+        .catch((err) => {
+          console.log(err);
         });
-    } else {
-      SetErrorMessage("please fill out value");
     }
   };
-
-  const sendRequestToLogIn = () => {
-    axios
-      .post(
-        `https://cors-anywhere.herokuapp.com/https://postmelon.herokuapp.com/api/auth`,
-        {
-          email: loginEmail,
-          password: loginPassword,
-        }
-      )
-      .then(
-        (response) => {
-          console.log(response);
-          setLoginEmail("");
-          setloginPassword("");
-          setIslogin(true);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-  };
-
-  const logInUser = () => {
-    sendRequestToLogIn();
-  };
-
   const createUser = () => {
     sendRequestToRegister();
   };
+
   return (
     <div>
-      <h1>Login</h1>
-
-      <label>Email</label>
-      <input
-        className=""
-        placeholder="Email"
-        type="text"
-        value={loginEmail}
-        onChange={(e) => setLoginEmail(e.target.value)}
-      ></input>
-
-      <br></br>
-      <label>Password</label>
-      <input
-        className=""
-        placeholder="Password"
-        type="password"
-        value={loginPassword}
-        onChange={(e) => setloginPassword(e.target.value)}
-      ></input>
-      <button onClick={logInUser}>Login</button>
+      <h1>register</h1>
       <h1>New user</h1>
       <label>Name</label>
       <input
@@ -114,13 +78,22 @@ const UserRegister = () => {
         type="password"
         value={password}
         onChange={(e) => setpassword(e.target.value)}
+      ></input>{" "}
+      <br></br>
+      <label>Confirm Password</label>
+      <input
+        className=""
+        placeholder="Password"
+        type="password"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
       ></input>
       <button onClick={createUser}>Submit</button>
-      {errorMessage}
       {isCreated && <Redirect to="/home"></Redirect>}
-      {isLogin && <Redirect to="/home"></Redirect>}
+      {errorMessage}
+      <br></br>
     </div>
   );
-};
+}
 
-export default UserRegister;
+export default Register;
