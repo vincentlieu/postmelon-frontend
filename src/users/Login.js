@@ -1,30 +1,31 @@
 import React, { useState } from "react";
-import axios from "axios";
+
 import { Redirect } from "react-router-dom";
+import localAPI from "../api/localAPI";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, SetErrorMessage] = useState("");
   const [isLogin, setIslogin] = useState(false);
+
   const sendRequestToLogIn = () => {
     if (email === "") {
       SetErrorMessage("Email can not be emty");
     } else if (password === "") {
       SetErrorMessage("Password can not be emty");
     } else {
-      axios
-        .post(
-          `https://cors-anywhere.herokuapp.com/https://postmelon.herokuapp.com/api/auth`,
-          {
-            email: email,
-            password: password,
-          }
-        )
+      localAPI
+        .post(`/auth`, {
+          email: email,
+          password: password,
+        })
         .then((res) => {
+          sessionStorage.setItem("token", res.data.token);
           console.log(res.data);
           setIslogin(true);
         })
         .catch((err) => {
+          SetErrorMessage(" Server Error Please try again");
           console.log(err);
         });
     }
