@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import { Redirect } from "react-router-dom";
-import localAPI from "../api/localAPI";
+import localAPI from "../../api/localAPI";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -1,6 +1,6 @@
 import React from "react";
-import Register from "../users/Register";
-import Login from "../users/Login";
+import Register from "../components/users/Register";
+import Login from "../components/users/Login";
 
 const Landing = () => {
   return (

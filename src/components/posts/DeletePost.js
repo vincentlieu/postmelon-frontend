@@ -1,5 +1,5 @@
 import React from 'react';
-import localAPI from '../api/localAPI';
+import localAPI from '../../api/localAPI';
 
 const DeletePost = ({ postId, onDelete }) => {
   
