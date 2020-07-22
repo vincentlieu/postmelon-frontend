@@ -6,7 +6,7 @@ import axios from "axios";
 }
 const localAPI = axios.create({
   baseURL:
-    "http://localhost:5000/api",
+    "https://cors-anywhere.herokuapp.com/https://postmelon.herokuapp.com/api/",
 });
 
 localAPI.interceptors.request.use((request) => {

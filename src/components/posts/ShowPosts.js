@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import localAPI from '../../api/localAPI';
-import DeletePost from '../posts/DeletePost';
-import Moment from 'react-moment';
-import { Paper, Grid, Box } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-
+import React, { useEffect, useState } from "react";
+import localAPI from "../../api/localAPI";
+import DeletePost from "../posts/DeletePost";
+import Moment from "react-moment";
+import { Paper, Grid, Box } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    overflow: 'hidden',
+    overflow: "hidden",
     padding: theme.spacing(0, 3),
   },
   paper: {
@@ -20,34 +19,36 @@ const useStyles = makeStyles((theme) => ({
 
 const ShowPosts = () => {
   const [posts, setPosts] = useState([]);
-  const classes = useStyles()
+  const classes = useStyles();
 
   useEffect(() => {
-    localAPI.get('/posts/')
-      .then((posts) => setPosts(posts.data));
+    localAPI.get("/posts/").then((posts) => {
+      setPosts(posts.data);
+      console.log(posts.data);
+    });
   }, [posts]);
 
   return posts.map((post) => (
     <Paper className={classes.paper}>
-      <Grid container wrap='nowrap' spacing={2}>
+      <Grid container wrap="nowrap" spacing={2}>
         <Grid item container>
           <Box width={1}>
-            <Box container display='flex' justifyContent='space-between'>
+            <Box container display="flex" justifyContent="space-between">
               {post.authorId}
-                <DeletePost
-                  postId={post._id}
-                  onDelete={() =>
-                    setPosts(posts.filter((p) => p._id !== post._id))
-                  }
-                />
+              <DeletePost
+                postId={post._id}
+                onDelete={() =>
+                  setPosts(posts.filter((p) => p._id !== post._id))
+                }
+              />
             </Box>
             <br />
             <div>{post.content}</div>
             <br />
-            <Box display='flex' justifyContent='flex-end' width={1}>
+            <Box display="flex" justifyContent="flex-end" width={1}>
               <Moment fromNow>{post.createdDate}</Moment>
             </Box>
-            <Box display='flex' justifyContent='flex-end' width={1}>
+            <Box display="flex" justifyContent="flex-end" width={1}>
               <div>Likes: {post.likes.length}</div>
             </Box>
           </Box>
@@ -58,7 +59,8 @@ const ShowPosts = () => {
   ));
 };
 
-{/* <div>
+{
+  /* <div>
   <div>Author: {post.authorId}</div>
   <div>Content: {post.content}</div>
   <div>Likes: {post.likes.length}</div>
@@ -69,6 +71,7 @@ const ShowPosts = () => {
     postId={post._id}
     onDelete={() => setPosts(posts.filter((p) => p._id !== post._id))}
   />
-</div>; */}
+</div>; */
+}
 
 export default ShowPosts;
