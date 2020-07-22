@@ -10,7 +10,7 @@ const LikePost = ({ postId }) => {
     }
 
     return (
-      <Button onClick={onLike} startIcon={<ThumbUpIcon />} color='default'>
+      <Button onClick={onLike} startIcon={<ThumbUpIcon />} color='default' fullWidth>
         Like
       </Button>
     );

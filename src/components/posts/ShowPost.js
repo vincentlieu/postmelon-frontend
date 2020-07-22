@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import localAPI from '../../api/localAPI';
-import DeletePost from '../posts/DeletePost';
-import Moment from 'react-moment';
-import { Paper, Grid, Box, Avatar, Divider } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Paper, Grid, Box, Avatar, Divider, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import LikePost from '../posts/LikePost';
-import Comment from '../posts/Comment';
+import LikePost from './LikePost';
+import DeletePost from './DeletePost';
+import Moment from 'react-moment';
+import ShowComments from './ShowComments';
+import MessageIcon from '@material-ui/icons/Message';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,16 +22,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowPosts = () => {
+const ShowPosts = ({ post }) => {
   const [posts, setPosts] = useState([]);
   const classes = useStyles()
+  const [comments, setComments] = useState(false)
 
-  useEffect(() => {
-    localAPI.get('/posts/')
-      .then((posts) => setPosts(posts.data));
-  }, [posts]);
-
-  return posts.map((post) => (
+  return (
     <Paper className={classes.paper} key={post._id}>
       <Grid container={true} wrap='wrap' spacing={2}>
         <Grid container={true} item>
@@ -62,14 +58,24 @@ const ShowPosts = () => {
               <div>Likes: {post.likes.length}</div>
             </Box>
             <Divider />
-            <LikePost postId={post._id} />
+            <Box display='flex' justifyContent='space-around'>
+              <LikePost postId={post._id} />
+              <Button
+                onClick={() => setComments(!comments)}
+                fullWidth
+                startIcon={<MessageIcon />}>
+                Comments
+              </Button>
+            </Box>
             <Divider />
-            <Comment postComments={post.comments} postId={post._id}/>
+            {comments && (
+              <ShowComments postComments={post.comments} postId={post._id} />
+            )}
           </Box>
         </Grid>
       </Grid>
     </Paper>
-  ));
+  );
 };
 
 export default ShowPosts;

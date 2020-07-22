@@ -1,14 +1,14 @@
 import React from "react";
 import { Container } from '@material-ui/core';
 import CreatePost from "../components/posts/CreatePost";
-import ShowPosts from '../components/posts/ShowPosts';
+import HomeFeed from '../components/posts/HomeFeed';
 
 const Home = () => {
   return (
     <Container maxWidth="sm">
       <h1>Home</h1>
       <CreatePost />
-      <ShowPosts/>
+      <HomeFeed/>
       {/* {sessionStorage.removeItem("token") */}
     </Container>
   );
