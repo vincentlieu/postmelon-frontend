@@ -17,7 +17,7 @@ const CreatePost = () => {
   return (
     <div>
       <Container disableGutters={true}>
-        <Box width={1} display='flex' justifyContent='center' align>
+        <Box width={1} display='flex' justifyContent='center'>
           <TextField
             fullWidth={true}
             variant='outlined'
