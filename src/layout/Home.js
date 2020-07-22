@@ -8,7 +8,7 @@ const Home = () => {
     <Container maxWidth="sm">
       <h1>Home</h1>
       <CreatePost />
-      <ShowPosts />
+      <ShowPosts/>
       {/* {sessionStorage.removeItem("token") */}
     </Container>
   );

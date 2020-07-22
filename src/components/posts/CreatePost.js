@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import localAPI from '../../api/localAPI';
 import { Button, TextField, Box, Container } from '@material-ui/core';
+import { Alert } from '@material-ui/lab'
 
 const CreatePost = () => {
   const [post, setPost] = useState('');
@@ -25,12 +26,12 @@ const CreatePost = () => {
             onChange={(e) => setPost(e.target.value)}></TextField>
         </Box>
         <Box display='flex' justifyContent='center'>
-          <Button onClick={onSubmit} color='primary'>
+          <Button onClick={onSubmit} color='primary' fullWidth variant='contained'>
             Post
           </Button>
         </Box>
       </Container>
-      <div>{error && <p>{error}</p>}</div>
+      {error && <Alert variant='filled' severity='error' >{error}</Alert>}
     </div>
   );
 };
