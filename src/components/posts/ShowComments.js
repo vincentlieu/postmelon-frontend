@@ -3,7 +3,6 @@ import CreateComment from './CreateComment';
 import { Avatar, Box, Divider, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-  
 const useStyles = makeStyles((theme) => ({
   comment: {
     margin: `${theme.spacing(1)}px auto`,
@@ -23,9 +22,9 @@ const Comments = ({ postComments, postId }) => {
       <div>
         <CreateComment postId={postId} />
         {postComments.map((comment) => (
-          <Container disableGutters={true} marginY={1}>
+          <Container disableGutters={true}>
             <Box
-              container={true}
+              container
               display='flex'
               alignItems='center'
               marginTop={1}>
