@@ -3,7 +3,7 @@ import localAPI from '../../api/localAPI';
 import { Button } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 
-const LikePost = ({ postId }) => {
+const LikePost = ({ postId}) => {
 
     function onLike() {
         localAPI.put(`/posts/${postId}/like`)
@@ -15,7 +15,7 @@ const LikePost = ({ postId }) => {
         startIcon={<ThumbUpIcon />}
         color='default'
         fullWidth>
-        Likes
+        Like
       </Button>
     );
 }

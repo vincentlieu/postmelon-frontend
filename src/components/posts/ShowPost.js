@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { Paper, Box, Avatar, Divider, Button, Typography, TextField } from '@material-ui/core';
+import { Paper, Box, Avatar, Divider, Button, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LikePost from './LikePost';
-import DeletePost from './DeletePost';
 import Moment from 'react-moment';
 import ShowComments from './ShowComments';
 import MessageIcon from '@material-ui/icons/Message';
 import EditPost from './EditPost';
+import PostMenu from './PostMenu';
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  postMenu: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
   postOptions: {
     display : 'flex',
     justifyContent: 'space-around'
@@ -46,11 +52,14 @@ const ShowPosts = ({ post }) => {
   return (
     <Paper className={classes.paper}>
       <Box className={classes.postContainer}>
-        
         {/* POSTHEADER - AVATAR, NAME, TIMESTAMP, DELETE, EDIT */}
         <Box className={classes.postHeader}>
           <Box display='flex' alignItems='center'>
-            <Avatar alt='profile-image' src={post.avatar} className={classes.postAuthor}/>
+            <Avatar
+              alt='profile-image'
+              src={post.avatar}
+              className={classes.postAuthor}
+            />
             <Box className={classes.postTime}>
               <Typography variant='h6'>{post.name}</Typography>
               <Typography variant='subtitle2'>
@@ -58,35 +67,54 @@ const ShowPosts = ({ post }) => {
               </Typography>
             </Box>
           </Box>
-          <DeletePost
-            postId={post._id}
-            onDelete={() => setPosts(posts.filter((p) => p._id !== post._id))}
-          />
+          <Box className={classes.postMenu}>
+            {editPostFlag && (
+              <EditPost
+                value={newPostContent}
+                postId={post._id}
+                confirmChange={() => setEditPostFlag(!editPostFlag)}
+                setNewPostContent={() =>
+                  setNewPostContent(newPostContent)
+                }></EditPost>
+            )}
+            <PostMenu
+              postId={post._id}
+              onDelete={() => setPosts(posts.filter((p) => p._id !== post._id))}
+              editPost={() => setEditPostFlag(!editPostFlag)}
+            />
+          </Box>
         </Box>
 
         {/* POSTBODY - CONTENT */}
-        {editPostFlag ? <input value={newPostContent} onChange={event => setNewPostContent(event.target.value)} /> : <Box>{post.content}</Box>}
+        {editPostFlag ? (
+          <input
+            value={newPostContent}
+            onChange={(event) => setNewPostContent(event.target.value)}
+          />
+        ) : (
+          <Box>{post.content}</Box>
+        )}
         <Box display='flex' justifyContent='flex-end'>
           <div>Likes: {post.likes.length}</div>
-          {!editPostFlag ? <button onClick={() => setEditPostFlag(!editPostFlag)}>Edit post</button> : <EditPost value={newPostContent} postId={post._id} confirmChange={() => setEditPostFlag(!editPostFlag)}>Confirm Changes</EditPost> }
         </Box>
 
         {/* POST OPTIONS - LIKES AND COMMENTS */}
         <Divider />
         <Box className={classes.postOptions}>
-          <LikePost postId={post._id} postLikes={post.likes} />
+          <LikePost postId={post._id}/>
           <Button
             onClick={() => setComments(!comments)}
             fullWidth
             startIcon={<MessageIcon />}>
-            Comments
+            Comment
           </Button>
         </Box>
         <Divider />
-        
-        {/* WHEN COMMENT OPTION IS CLICKED - SHOW/HIDE COMMENTS BENEATH THE POST. */}
-        {comments && (<ShowComments postComments={post.comments} postId={post._id} />)}
 
+        {/* WHEN COMMENT OPTION IS CLICKED - SHOW/HIDE COMMENTS BENEATH THE POST. */}
+        {comments && (
+          <ShowComments postComments={post.comments} postId={post._id} />
+        )}
       </Box>
     </Paper>
   );
