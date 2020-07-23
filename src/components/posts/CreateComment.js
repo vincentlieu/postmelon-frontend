@@ -29,10 +29,10 @@ const CreateComments = ({ postId }) => {
       <Box marginTop={1}>
         <TextField
           size='small'
-          multiline={true}
           fullWidth={true}
           error={error ? true : false}
           label={error ? error : null}
+          multiline={true}
           rows={2}
           rowsMax={2}
           variant='outlined'

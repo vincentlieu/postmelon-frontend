@@ -77,7 +77,7 @@ const ShowPosts = ({ post }) => {
             </Button>
           </Box>
         <Divider />
-          {comments && (<ShowComments postComments={post.comments} postId={post._id} />)}
+        {comments && (<ShowComments postComments={post.comments} postId={post._id}/>)}
         </Box>
     </Paper>
   );
