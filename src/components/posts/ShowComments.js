@@ -1,7 +1,7 @@
 import React from 'react';
 import Moment from 'react-moment';
 import CreateComment from './CreateComment';
-import { Avatar, Box, Divider, Typography } from '@material-ui/core';
+import { Avatar, Box, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
