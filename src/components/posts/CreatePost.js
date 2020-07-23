@@ -43,8 +43,7 @@ const CreatePost = () => {
           label={error ? error : null}
           fullWidth={true}
           multiline={true}
-          rows={3}
-          rowsMax={3}
+          rowsMin={3}
           variant='outlined'
           type='text'
           value={post}

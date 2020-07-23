@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Paper, Box, Avatar, Divider, Button, Typography } from '@material-ui/core';
+import { Paper, Box, Avatar, Divider, Button, Typography, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import LikePost from './LikePost';
 import Moment from 'react-moment';
@@ -7,7 +7,6 @@ import ShowComments from './ShowComments';
 import MessageIcon from '@material-ui/icons/Message';
 import EditPost from './EditPost';
 import PostMenu from './PostMenu';
-
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowPosts = ({ post }) => {
+const ShowPost = ({ post }) => {
   const [posts, setPosts] = useState([]);
   const [editPostFlag, setEditPostFlag] = useState(false)
   const [newPostContent, setNewPostContent] = useState(post.content)
@@ -69,25 +68,36 @@ const ShowPosts = ({ post }) => {
           </Box>
           <Box className={classes.postMenu}>
             {editPostFlag && (
-              <EditPost
-                value={newPostContent}
-                postId={post._id}
-                confirmChange={() => setEditPostFlag(!editPostFlag)}
-                setNewPostContent={() =>
-                  setNewPostContent(newPostContent)
-                }></EditPost>
+              <Box className={classes.postMenu}>
+                <EditPost
+                  value={newPostContent}
+                  postId={post._id}
+                  confirmChange={() => setEditPostFlag(!editPostFlag)}
+                  setNewPostContent={() => setNewPostContent(newPostContent)}
+                  cancelChange={() => {
+                    setEditPostFlag(!editPostFlag);
+                    setNewPostContent(post.content);
+                  }}
+                />
+              </Box>
             )}
             <PostMenu
               postId={post._id}
               onDelete={() => setPosts(posts.filter((p) => p._id !== post._id))}
-              editPost={() => setEditPostFlag(!editPostFlag)}
+              editPost={() => {
+                setEditPostFlag(!editPostFlag);
+                setNewPostContent(post.content);
+              }}
             />
           </Box>
         </Box>
 
         {/* POSTBODY - CONTENT */}
         {editPostFlag ? (
-          <input
+          <TextField
+            fullWidth={true}
+            multiline={true}
+            variant='outlined'
             value={newPostContent}
             onChange={(event) => setNewPostContent(event.target.value)}
           />
@@ -101,7 +111,7 @@ const ShowPosts = ({ post }) => {
         {/* POST OPTIONS - LIKES AND COMMENTS */}
         <Divider />
         <Box className={classes.postOptions}>
-          <LikePost postId={post._id}/>
+          <LikePost postId={post._id} />
           <Button
             onClick={() => setComments(!comments)}
             fullWidth
@@ -120,4 +130,4 @@ const ShowPosts = ({ post }) => {
   );
 };
 
-export default ShowPosts;
+export default ShowPost;

@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeletePost from './DeletePost';
 
-export default function LongMenu({ editPost, postId }) {
+const PostMenu = ({ editPost, postId }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -27,7 +27,6 @@ export default function LongMenu({ editPost, postId }) {
         <MoreVertIcon />
       </IconButton>
       <Menu
-        id='long-menu'
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: 'bottom',
@@ -47,3 +46,5 @@ export default function LongMenu({ editPost, postId }) {
     </div>
   );
 }
+
+export default PostMenu
