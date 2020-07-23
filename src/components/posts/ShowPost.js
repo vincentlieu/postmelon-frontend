@@ -8,11 +8,6 @@ import ShowComments from './ShowComments';
 import MessageIcon from '@material-ui/icons/Message';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    overflow: 'hidden',
-    padding: theme.spacing(0, 3),
-  },
   paper: {
     margin: `${theme.spacing(2)}px auto`,
     padding: theme.spacing(1),
@@ -38,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     display : 'flex',
     justifyContent: 'space-around'
   }
-  
 }));
 
 const ShowPosts = ({ post }) => {
