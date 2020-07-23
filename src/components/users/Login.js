@@ -22,7 +22,7 @@ function Login() {
         })
         .then((res) => {
           sessionStorage.setItem("token", res.data.token);
-          console.log(res.data);
+          console.log(res);
           setIslogin(true);
         })
         .catch((err) => {

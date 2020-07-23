@@ -26,7 +26,7 @@ const ShowPosts = () => {
       setPosts(posts.data);
       console.log(posts.data);
     });
-  }, [posts]);
+  }, []);
 
   return posts.map((post) => (
     <Paper className={classes.paper}>
