@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import localAPI from '../../api/localAPI';
 import { Button, TextField, Box, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useGlobalState } from "../../config/GlobalState";
 
 const useStyles = makeStyles((theme) => ({
   createPostContainer: {
@@ -18,16 +19,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreatePost = () => {
-  const [post, setPost] = useState('');
-  const [error, setError] = useState('');
+  const [post, setPost] = useState("");
+  const [error, setError] = useState("");
+  const { dispatch, store } = useGlobalState();
+  const { posts } = store;
+    
   const classes = useStyles();
 
   function onSubmit() {
     if (post) {
       localAPI
-        .post('/posts/', { content: post })
-        .then(setPost(''))
-        .then(setError(''))
+        .post("/posts/", { content: post })
+        .then((post) => {
+          dispatch({ type: "addPost", data: [post.data, ...posts] });
+          setPost("");
+        })
         .catch((error) => setError(error.response.data.errors[0].msg));
     } else {
       setError('Post content required.');

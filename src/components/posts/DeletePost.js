@@ -5,8 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 const DeletePost = ({ postId, onDelete }) => {
 
   function deletePost() {
-    localAPI.delete(`/posts/${postId}`)
-      .then(onDelete)
+    localAPI.delete(`/posts/${postId}`).then(onDelete);
   }
 
   return (
@@ -14,6 +13,6 @@ const DeletePost = ({ postId, onDelete }) => {
       Delete Post
     </MenuItem>
   );
-}
+};
 
 export default DeletePost;

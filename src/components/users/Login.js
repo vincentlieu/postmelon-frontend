@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useGlobalState } from "../../config/GlobalState";
 
 import { Redirect } from "react-router-dom";
 import localAPI from "../../api/localAPI";
 
 function Login() {
+  const { dispatch } = useGlobalState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, SetErrorMessage] = useState("");
@@ -22,7 +24,8 @@ function Login() {
         })
         .then((res) => {
           sessionStorage.setItem("token", res.data.token);
-          console.log(res.data);
+          // console.log(res);
+
           setIslogin(true);
         })
         .catch((err) => {
@@ -32,7 +35,19 @@ function Login() {
     }
   };
 
+  const getUserId = () => {
+    localAPI
+      .get(`/auth`)
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: "getUserID", data: res.data._id });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const logInUser = () => {
+    getUserId();
     sendRequestToLogIn();
   };
 

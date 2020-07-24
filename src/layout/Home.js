@@ -3,18 +3,24 @@ import { Container } from '@material-ui/core';
 import CreatePost from "../components/posts/CreatePost";
 import localAPI from '../api/localAPI';
 import ShowPost from '../components/posts/ShowPost';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress} from '@material-ui/core';
+import NavBar from "./NavBar";
+import { useGlobalState } from "../../src/config/GlobalState";
 
 const Home = () => {
-    const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const { store, dispatch} = useGlobalState();
+    const { posts, userID } = store;
 
-    useEffect(() => {
-      localAPI
-        .get('/posts/')
-        .then((posts) => setPosts(posts.data))
-        .then(() => setIsLoading(false), [isLoading]);
-    }, []);
+  useEffect(() => {
+    localAPI
+      .get('/posts/')
+      .then((posts) => {
+        dispatch({ type: 'setPosts', data: posts.data });
+        console.log(posts.data);
+      })
+      .then(setIsLoading(!isLoading));
+  }, []);
   
   function renderPosts() {
     return posts.map((post) => <ShowPost post={post}></ShowPost>);
@@ -26,8 +32,8 @@ const Home = () => {
 
   return (
     <Container maxWidth='sm'>
-      <h1>Home</h1>
-      <CreatePost/>
+      <h1>Home {userID}</h1>
+      <CreatePost />
       <>{!isLoading ? renderPosts() : renderLoading()}</>
       {/* {sessionStorage.removeItem("token") */}
     </Container>
