@@ -28,6 +28,7 @@ const PostMenu = ({ editPost, postId }) => {
       </IconButton>
       <Menu
         anchorEl={anchorEl}
+        getContentAnchorEl={null}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center',

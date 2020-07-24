@@ -17,7 +17,6 @@ const Home = () => {
       .get('/posts/')
       .then((posts) => {
         dispatch({ type: 'setPosts', data: posts.data });
-        console.log(posts.data);
       })
       .then(setIsLoading(!isLoading));
   }, []);

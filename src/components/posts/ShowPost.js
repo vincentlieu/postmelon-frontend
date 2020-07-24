@@ -86,7 +86,6 @@ const ShowPost = ({ post, deletePost }) => {
             <PostMenu
               postId={post._id}
               onDelete={deletePost}
-              onDelete={() => { resetEdit(); setPosts(posts.filter((p) => p._id !== post._id)) }}
               editPost={() => resetEdit()}
             />
           </Box>
@@ -105,7 +104,7 @@ const ShowPost = ({ post, deletePost }) => {
           <Box>{post.content}</Box>
         )}
         <Box display='flex' justifyContent='flex-end'>
-          <div>Likes: {post.likes.length}</div>
+          {/* <div>Likes: {post.likes.length}</div> */}
         </Box>
 
         {/* POST OPTIONS - LIKES AND COMMENTS */}

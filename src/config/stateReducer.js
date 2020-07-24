@@ -6,6 +6,9 @@ export default (state, action) => {
     case "addPost": {
       return { ...state, posts: action.data };
     }
+    case "deletePost": {
+      return { ...state, posts: action.data };
+      }
     case "getUserID": {
       return { ...state, userID: action.data };
     }
