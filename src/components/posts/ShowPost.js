@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShowPost = ({ post, deletePost }) => {
-  const [posts, setPosts] = useState([]);
   const [editPostFlag, setEditPostFlag] = useState(false)
   const [newPostContent, setNewPostContent] = useState(post.content)
   const [comments, setComments] = useState(false)
@@ -71,6 +70,7 @@ const ShowPost = ({ post, deletePost }) => {
               </Typography>
             </Box>
           </Box>
+          {/* POSTHEADER - MENU OPTIONS - EDIT AND DELETE POST */}
           <Box className={classes.postMenu}>
             {editPostFlag && (
               <Box className={classes.postMenu}>
@@ -104,7 +104,7 @@ const ShowPost = ({ post, deletePost }) => {
           <Box>{post.content}</Box>
         )}
         <Box display='flex' justifyContent='flex-end'>
-          {/* <div>Likes: {post.likes.length}</div> */}
+          <div>Likes: {post.likes.length}</div>
         </Box>
 
         {/* POST OPTIONS - LIKES AND COMMENTS */}

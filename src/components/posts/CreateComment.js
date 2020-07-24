@@ -21,7 +21,6 @@ const CreateComments = ({ postId }) => {
                 setNewComment('')
                 setError("Content cannot be empty.")
             }
-        
           }
     }
 

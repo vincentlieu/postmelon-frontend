@@ -7,22 +7,16 @@ import { CircularProgress} from '@material-ui/core';
 import NavBar from "./NavBar";
 import { useGlobalState } from "../../src/config/GlobalState";
 
-const Home = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const { store, dispatch} = useGlobalState();
-    const { posts, userID } = store;
+const Home = ({ posts, isLoading }) => {
 
-  useEffect(() => {
-    localAPI
-      .get('/posts/')
-      .then((posts) => {
-        dispatch({ type: 'setPosts', data: posts.data });
-      })
-      .then(setIsLoading(!isLoading));
-  }, []);
+    const { store, dispatch} = useGlobalState();
+    const { userID } = store;
   
   function renderPosts() {
-    return posts.map((post) => <ShowPost post={post}></ShowPost>);
+    return posts
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .map((post) => <ShowPost post={post}></ShowPost>)
+    // .then(setIsLoading(!isLoading))
   }
 
   function renderLoading() {
