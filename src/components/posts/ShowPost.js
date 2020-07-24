@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShowPost = ({ post, deletePost }) => {
-  const [posts, setPosts] = useState([]);
   const [editPostFlag, setEditPostFlag] = useState(false)
   const [newPostContent, setNewPostContent] = useState(post.content)
   const [comments, setComments] = useState(false)
@@ -71,6 +70,7 @@ const ShowPost = ({ post, deletePost }) => {
               </Typography>
             </Box>
           </Box>
+          {/* POSTHEADER - MENU OPTIONS - EDIT AND DELETE POST */}
           <Box className={classes.postMenu}>
             {editPostFlag && (
               <Box className={classes.postMenu}>
@@ -86,7 +86,6 @@ const ShowPost = ({ post, deletePost }) => {
             <PostMenu
               postId={post._id}
               onDelete={deletePost}
-              onDelete={() => { resetEdit(); setPosts(posts.filter((p) => p._id !== post._id)) }}
               editPost={() => resetEdit()}
             />
           </Box>
