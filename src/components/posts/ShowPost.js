@@ -41,12 +41,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowPost = ({ post }) => {
+const ShowPost = ({ post, deletePost }) => {
   const [posts, setPosts] = useState([]);
   const [editPostFlag, setEditPostFlag] = useState(false)
   const [newPostContent, setNewPostContent] = useState(post.content)
   const [comments, setComments] = useState(false)
   const classes = useStyles();
+
+  const resetEdit = () => {
+    setEditPostFlag(!editPostFlag);
+    setNewPostContent(post.content);
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -74,20 +79,15 @@ const ShowPost = ({ post }) => {
                   postId={post._id}
                   confirmChange={() => setEditPostFlag(!editPostFlag)}
                   setNewPostContent={() => setNewPostContent(newPostContent)}
-                  cancelChange={() => {
-                    setEditPostFlag(!editPostFlag);
-                    setNewPostContent(post.content);
-                  }}
+                  cancelChange={() => resetEdit()}
                 />
               </Box>
             )}
             <PostMenu
               postId={post._id}
-              onDelete={() => setPosts(posts.filter((p) => p._id !== post._id))}
-              editPost={() => {
-                setEditPostFlag(!editPostFlag);
-                setNewPostContent(post.content);
-              }}
+              onDelete={deletePost}
+              onDelete={() => { resetEdit(); setPosts(posts.filter((p) => p._id !== post._id)) }}
+              editPost={() => resetEdit()}
             />
           </Box>
         </Box>

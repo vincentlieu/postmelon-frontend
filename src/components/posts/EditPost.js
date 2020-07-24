@@ -14,8 +14,8 @@ const EditPost = ({ value, postId, confirmChange, setNewPostContent, cancelChang
           <SaveIcon />
         </IconButton>
         <IconButton
-                onClick={cancelChange}
-          >
+        onClick={cancelChange}
+        >
           <CancelIcon />
         </IconButton>
       </div>
