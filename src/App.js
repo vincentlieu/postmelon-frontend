@@ -4,10 +4,11 @@ import Home from "./layout/Home";
 import Landing from "./layout/Landing";
 import { ThemeProvider } from '@material-ui/core/styles'
 import PostMelon from './ui/theme'
+import { Box } from '@material-ui/core';
 
 function App() {
   return (
-    <div>
+    <Box>
       <ThemeProvider theme={PostMelon}>
         <Router>
           <Switch>
@@ -16,7 +17,7 @@ function App() {
           </Switch>
         </Router>
       </ThemeProvider>
-    </div>
+    </Box>
   );
 }
 

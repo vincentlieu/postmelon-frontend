@@ -1,37 +1,64 @@
 import React, { useState } from 'react';
 import localAPI from '../../api/localAPI';
-import { Button, TextField, Box, Container } from '@material-ui/core';
-import { Alert } from '@material-ui/lab'
+import { Button, TextField, Box, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  createPostContainer: {
+    margin: `${theme.spacing(4)}px auto`,
+    padding: theme.spacing(1),
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  createPostBtn: {
+    marginTop: theme.spacing(3),
+      marginBottom: theme.spacing(1.5),
+    width: '100%',
+  },
+}));
 
 const CreatePost = () => {
   const [post, setPost] = useState('');
   const [error, setError] = useState('');
+  const classes = useStyles();
 
   function onSubmit() {
-    localAPI
-      .post('/posts/', { content: post })
-      .then(setPost(''))
-      .catch((error) => setError(error.response.data.message));
+    if (post) {
+      localAPI
+        .post('/posts/', { content: post })
+        .then(setPost(''))
+        .then(setError(''))
+        .catch((error) => setError(error.response.data.errors[0].msg));
+    } else {
+      setError('Post content required.');
+    }
   }
 
   return (
     <div>
-      <Container disableGutters={true}>
-        <Box width={1} display='flex' justifyContent='center' align>
-          <TextField
-            fullWidth={true}
-            variant='outlined'
-            type='text'
-            value={post}
-            onChange={(e) => setPost(e.target.value)}></TextField>
-        </Box>
-        <Box display='flex' justifyContent='center'>
-          <Button onClick={onSubmit} color='primary' fullWidth variant='contained'>
+      <Paper className={classes.createPostContainer}>
+        <TextField
+          placeholder='Tell the world something...'
+          error={error ? true : false}
+          label={error ? error : null}
+          fullWidth={true}
+          multiline={true}
+          rowsMin={3}
+          variant='outlined'
+          type='text'
+          value={post}
+          onChange={(e) => setPost(e.target.value)}
+        />
+        <Box>
+          <Button
+            className={classes.createPostBtn}
+            onClick={onSubmit}
+            color='primary'
+            variant='contained'>
             Post
           </Button>
         </Box>
-      </Container>
-      {error && <Alert variant='filled' severity='error' >{error}</Alert>}
+      </Paper>
     </div>
   );
 };
