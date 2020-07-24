@@ -4,6 +4,7 @@ import DeletePost from "../posts/DeletePost";
 import Moment from "react-moment";
 import { Paper, Grid, Box } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useGlobalState } from "../../config/GlobalState";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,16 +18,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ShowPosts = () => {
-  const [posts, setPosts] = useState([]);
+const ShowPosts = (props) => {
+  const { posts } = props;
+  // const { store, dispatch } = useGlobalState();
+  // const { posts } = store;
+
   const classes = useStyles();
 
-  useEffect(() => {
-    localAPI.get("/posts/").then((posts) => {
-      setPosts(posts.data);
-      console.log(posts.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   localAPI.get("/posts/").then((posts) => {
+  //     dispatch({ type: "setPosts", data: posts.data });
+  //     console.log(posts.data);
+  //   });
+  // }, []);
 
   return posts.map((post) => (
     <Paper className={classes.paper}>
@@ -35,12 +39,12 @@ const ShowPosts = () => {
           <Box width={1}>
             <Box container display="flex" justifyContent="space-between">
               {post.authorId}
-              <DeletePost
+              {/* <DeletePost
                 postId={post._id}
                 onDelete={() =>
                   setPosts(posts.filter((p) => p._id !== post._id))
                 }
-              />
+              /> */}
             </Box>
             <br />
             <div>{post.content}</div>
@@ -49,7 +53,7 @@ const ShowPosts = () => {
               <Moment fromNow>{post.createdDate}</Moment>
             </Box>
             <Box display="flex" justifyContent="flex-end" width={1}>
-              <div>Likes: {post.likes.length}</div>
+              {/* <div>Likes: {post.likes.length}</div> */}
             </Box>
           </Box>
         </Grid>
