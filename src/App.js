@@ -2,8 +2,9 @@ import React, { useReducer } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./layout/Home";
 import Landing from "./layout/Landing";
-import { ThemeProvider } from "@material-ui/core/styles";
-import PostMelon from "./ui/theme";
+import { ThemeProvider } from '@material-ui/core/styles'
+import PostMelon from './ui/theme'
+import { Box } from '@material-ui/core';
 import { StateContext } from "./config/GlobalState";
 import stateReducer from "./config/stateReducer";
 
@@ -12,7 +13,7 @@ function App() {
   const [store, dispatch] = useReducer(stateReducer, initialState);
   const { posts, token } = store;
   return (
-    <div>
+    <Box>
       <ThemeProvider theme={PostMelon}>
         <StateContext.Provider value={{ store, dispatch }}>
           <Router>
@@ -29,7 +30,7 @@ function App() {
           </Router>
         </StateContext.Provider>
       </ThemeProvider>
-    </div>
+    </Box>
   );
 }
 
