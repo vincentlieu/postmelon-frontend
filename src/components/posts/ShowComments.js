@@ -3,6 +3,7 @@ import Moment from 'react-moment';
 import CreateComment from './CreateComment';
 import { Avatar, Box, Divider } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import CommentMenu from './CommentMenu';
 
 const useStyles = makeStyles((theme) => ({
   commentContainer: {
@@ -17,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
   },
   commentHeader: {
     display: 'flex',
-    margin: `${theme.spacing(2)}px auto`
+    margin: `${theme.spacing(2)}px auto`,
+    justifyContent: 'space-between'
   },
   postAuthor: {
     marginRight: '10px',
@@ -39,9 +41,10 @@ const Comments = ({ postComments, postId }) => {
                 <Avatar src={comment.avatar} />
                 <Box ml={1} className={classes.commentNameTime}>
                   {comment.name}
-                    <Moment fromNow>{comment.createdDate}</Moment>
+                  <Moment fromNow>{comment.createdDate}</Moment>
                 </Box>
               </Box>
+              <CommentMenu commentId={comment._id} postId={postId}/>
             </Box>
             <Box className={classes.commentContent}>{comment.content}</Box>
             <Divider />

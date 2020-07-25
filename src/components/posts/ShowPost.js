@@ -89,7 +89,6 @@ const ShowPost = ({ post, deletePost, userId }) => {
                 onDelete={deletePost}
                 editPost={() => resetEdit()}
               />
-            
           </Box>
         </Box>
 

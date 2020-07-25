@@ -11,6 +11,7 @@ const CreateComments = ({ postId }) => {
 
   function onSubmit(event) {
     if (event.keyCode === 13 && !event.shiftKey) {
+      event.preventDefault();
       if (newComment !== '\n') {
         localAPI
           .post(`/posts/${postId}/comments`, {
