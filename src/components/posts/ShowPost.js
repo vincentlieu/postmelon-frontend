@@ -41,16 +41,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowPost = ({ post, deletePost }) => {
-  const [editPostFlag, setEditPostFlag] = useState(false)
-  const [newPostContent, setNewPostContent] = useState(post.content)
-  const [comments, setComments] = useState(false)
+const ShowPost = ({ post, deletePost, userId }) => {
+  const [editPostFlag, setEditPostFlag] = useState(false);
+  const [newPostContent, setNewPostContent] = useState(post.content);
+  const [comments, setComments] = useState(false);
+
   const classes = useStyles();
 
   const resetEdit = () => {
     setEditPostFlag(!editPostFlag);
     setNewPostContent(post.content);
-  }
+  };
 
   return (
     <Paper className={classes.paper}>
@@ -83,11 +84,12 @@ const ShowPost = ({ post, deletePost }) => {
                 />
               </Box>
             )}
-            <PostMenu
-              postId={post._id}
-              onDelete={deletePost}
-              editPost={() => resetEdit()}
-            />
+              <PostMenu
+                postId={post._id}
+                onDelete={deletePost}
+                editPost={() => resetEdit()}
+              />
+            
           </Box>
         </Box>
 
@@ -104,7 +106,7 @@ const ShowPost = ({ post, deletePost }) => {
           <Box>{post.content}</Box>
         )}
         <Box display='flex' justifyContent='flex-end'>
-          <div>Likes: {post.likes.length}</div>
+          <div>Likes: {post.likes.length} </div>
         </Box>
 
         {/* POST OPTIONS - LIKES AND COMMENTS */}

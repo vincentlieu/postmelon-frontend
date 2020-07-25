@@ -39,7 +39,6 @@ function Login() {
     localAPI
       .get(`/auth`)
       .then((res) => {
-        console.log(res);
         dispatch({ type: "getUserID", data: res.data._id });
       })
       .catch((err) => {

@@ -12,6 +12,12 @@ export default (state, action) => {
     case 'editPost': {
       return { ...state, posts: action.data };
     }
+    case 'likePost': {
+      return { ...state, posts: action.data };
+    }
+    case 'addComment': {
+      return { ...state, posts: action.data };
+    }
     case 'getUserID': {
       return { ...state, userID: action.data };
     }
