@@ -12,10 +12,10 @@ const EditPost = ({ value, postId, confirmChange, setNewPostContent, cancelChang
   function onSubmit() {
     localAPI.put(`/posts/${postId}`, { content: value })
       .then((post) => {
-        const otherPosts = posts.filter((p) => p._id !== post.data.postId);
+        const otherPosts = posts.filter((p) => p._id !== post.data._id);
         dispatch({
           type: 'editPost',
-          data: [post.data.post ,...otherPosts]
+          data: [post.data ,...otherPosts]
         })
       })
       .then(confirmChange)

@@ -37,7 +37,7 @@ const CreatePost = () => {
         })
         .catch((error) => setError(error.response.data.errors[0].msg));
     } else {
-      setError('Post content required.');
+      setError('Post conßtent required.');
     }
   }
 
