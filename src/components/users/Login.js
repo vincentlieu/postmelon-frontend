@@ -25,11 +25,9 @@ function Login({ history }) {
         .then((res) => {
           sessionStorage.setItem("token", res.data.token);
           // console.log(res);
-          dispatch(
-            { type: 'setToken', data: res.data.token }
-          )
-          dispatch({ type: 'getUserID', data: res.data.userId });
-          history.push('/home')
+          dispatch({ type: "setToken", data: res.data.token });
+          dispatch({ type: "getUserID", data: res.data.userId });
+          history.push("/home");
           setIslogin(true);
         })
         .catch((err) => {
@@ -39,46 +37,32 @@ function Login({ history }) {
     }
   };
 
-  // const getUserId = () => {
-  //   localAPI
-  //     .get(`/auth`)
-  //     .then((res) => {
-  //       dispatch({ type: "getUserID", data: res.data._id });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-  // const logInUser = () => {
-
-  //   sendRequestToLogIn();
-  //       getUserId();
-  // };
-
   return (
     <div>
       <h1>login</h1>
       <label>Email</label>
       <input
-        className='login-email'
-        placeholder='Email'
-        type='text'
+        className="login-email"
+        placeholder="Email"
+        type="text"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}></input>
+        onChange={(e) => setEmail(e.target.value)}
+      ></input>
 
       <br></br>
       <label>Password</label>
       <input
-        className='login-password'
-        placeholder='Password'
-        type='password'
+        className="login-password"
+        placeholder="Password"
+        type="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}></input>
+        onChange={(e) => setPassword(e.target.value)}
+      ></input>
       {/* {isLogin && <Redirect to="/home"></Redirect>} */}
-      <button className='login-button' onClick={sendRequestToLogIn}>
+      <button className="login-button" onClick={sendRequestToLogIn}>
         Login
       </button>
-      {errorMessage && <div className='error-message'> {errorMessage} </div>}
+      {errorMessage && <div className="error-message"> {errorMessage} </div>}
     </div>
   );
 }

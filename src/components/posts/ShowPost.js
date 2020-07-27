@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import CreateFriend from "../createFriend/CreateFriend";
+import localAPI from "../../api/localAPI";
 import {
   Paper,
   Box,
@@ -73,6 +76,8 @@ const ShowPost = ({ post, deletePost, userID }) => {
               src={post.avatar}
               className={classes.postAuthor}
             />
+            <Link to={`/profile/user/${post.authorId}`}>Show profile</Link>
+
             <Box className={classes.postTime}>
               <Typography variant="h6">{post.name}</Typography>
               <Typography variant="subtitle2">

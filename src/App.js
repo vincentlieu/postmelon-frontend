@@ -1,13 +1,13 @@
 import React, { useReducer } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./layout/Home";
+import Profile from "./layout/Profile";
 import Landing from "./layout/Landing";
-import { ThemeProvider } from '@material-ui/core/styles'
-import PostMelon from './ui/theme'
-import { Box } from '@material-ui/core';
+import { ThemeProvider } from "@material-ui/core/styles";
+import PostMelon from "./ui/theme";
+import { Box } from "@material-ui/core";
 import { StateContext } from "./config/GlobalState";
 import stateReducer from "./config/stateReducer";
-
 
 function App() {
   const initialState = { posts: [], token: null, userID: null };
@@ -19,14 +19,21 @@ function App() {
         <StateContext.Provider value={{ store, dispatch }}>
           <Router>
             <Switch>
-              <Route exact path="/" render={(props) => { return <Landing {...props}/> }} />
+              <Route
+                exact
+                path="/"
+                render={(props) => {
+                  return <Landing {...props} />;
+                }}
+              />
               <Route
                 exact
                 path="/home"
                 render={(props) => {
-                  return <Home {...props}/>;
+                  return <Home {...props} />;
                 }}
               />
+              <Route exact path="/profile/user/:id" component={Profile} />
             </Switch>
           </Router>
         </StateContext.Provider>

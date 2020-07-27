@@ -37,6 +37,7 @@ const Home = () => {
   return (
     <Container maxWidth="sm">
       <h1>Home {userID}</h1>
+      <NavBar />
 
       <CreatePost />
       <>{!isLoading ? renderPosts() : renderLoading()}</>
