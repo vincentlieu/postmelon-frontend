@@ -35,7 +35,13 @@ function Profile() {
   }, []);
 
   const friends = userFriends.map((friend) => {
-    return <div>{friend.name}</div>;
+    return (
+      <div>
+        <ul>
+          <li>Friend Name: {friend.name}</li>
+        </ul>
+      </div>
+    );
   });
 
   return profile && userDetails ? (
