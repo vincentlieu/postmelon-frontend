@@ -1,55 +1,20 @@
 import React from 'react';
-import Moment from 'react-moment';
 import CreateComment from './CreateComment';
-import { Avatar, Box, Divider } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import CommentMenu from './CommentMenu';
-
-const useStyles = makeStyles((theme) => ({
-  commentContainer: {
-    width: '100%',
-  },
-  commentContent: {
-    margin: `${theme.spacing(2)}px auto`,
-  },
-  commentNameTime: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  commentHeader: {
-    display: 'flex',
-    margin: `${theme.spacing(2)}px auto`,
-    justifyContent: 'space-between'
-  },
-  postAuthor: {
-    marginRight: '10px',
-    display: 'flex',
-  },
-}));
+import Comment from './Comment';
 
 const Comments = ({ postComments, postId }) => {
 
-  const classes = useStyles();
+  function renderComment() {
+    return (
+      postComments.map((comment) => (
+      <Comment comment={comment} postId={postId}></Comment>
+    )))
+  }
 
     return (
       <div>
         <CreateComment postId={postId} />
-        {postComments.map((comment) => (
-          <Box className={classes.commentContainer}>
-            <Box className={classes.commentHeader}>
-              <Box display='flex' alignItems='center'>
-                <Avatar src={comment.avatar} />
-                <Box ml={1} className={classes.commentNameTime}>
-                  {comment.name}
-                  <Moment fromNow>{comment.createdDate}</Moment>
-                </Box>
-              </Box>
-              <CommentMenu commentId={comment._id} postId={postId}/>
-            </Box>
-            <Box className={classes.commentContent}>{comment.content}</Box>
-            <Divider />
-          </Box>
-        ))}
+        {renderComment()}
       </div>
     );
 }

@@ -21,6 +21,9 @@ export default (state, action) => {
     case 'deleteComment': {
       return { ...state, posts: action.data };
     }
+    case 'editComment': {
+      return { ...state, posts: action.data };
+    }
     case 'getUserID': {
       return { ...state, userID: action.data };
     }
