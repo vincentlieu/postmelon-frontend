@@ -54,6 +54,7 @@ const Comment = ({ comment, postId }) => {
             <Moment fromNow>{comment.createdDate}</Moment>
           </Box>
         </Box>
+        {/* COMMENTMENU - MENU OPTIONS - EDIT AND DELETE COMMENT */}
         <Box className={classes.commentMenu}>
           {editCommentFlag && (
             <Box className={classes.commentMenu}>

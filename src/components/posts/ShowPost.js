@@ -3,7 +3,7 @@ import { Paper, Box, Avatar, Divider, Button, Typography, TextField } from '@mat
 import { makeStyles } from '@material-ui/core/styles';
 import LikePost from './LikePost';
 import Moment from 'react-moment';
-import ShowComments from './ShowComments';
+import ShowComments from '../comments/ShowComments';
 import MessageIcon from '@material-ui/icons/Message';
 import EditPost from './EditPost';
 import PostMenu from './PostMenu';
