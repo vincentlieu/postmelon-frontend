@@ -1,38 +1,63 @@
 import React, { useState, useEffect } from "react";
 import localAPI from "../api/localAPI";
+import { TextField } from '@material-ui/core'
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Redirect } from 'react-router-dom';
 
 function NavBar() {
-  const [searchs, setSearchs] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const [options, setOptions] = useState([]);
+  const loading = open && options.length === 0;
+  
   useEffect(() => {
     localAPI
       .get(`/users`)
       .then((res) => {
-        setSearchs(res.data);
-        console.log(res.data);
+        setOptions(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  return searchs ? (
-    <section>
-      <div>
-        {searchs.map((search) => (
-          <li>{search.name}</li>
-        ))}
-      </div>
-      <input
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
-      {/* {searchValue && setSearchs.filter(r => r.includes(searchValue)).map(t => <li>{t}</li>)} */}
-    </section>
-  ) : (
-    <section>
-      <h1>Not Found! Please try different name </h1>
-    </section>
+  function userProfile() {
+    return (
+      <Redirect to={``}/>
+    )
+  }
+
+  return (
+    <Autocomplete
+      style={{ width: 300 }}
+      open={open}
+      onOpen={() => {
+        setOpen(true);
+      }}
+      onClose={() => {
+        setOpen(false);
+      }}
+      getOptionSelected={(option, value) => (console.log(value.name))}
+      getOptionLabel={(option) => option.name}
+      options={options}
+      loading={loading}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          variant="outlined"
+          InputProps={{
+            ...params.InputProps,
+            endAdornment: (
+              <React.Fragment>
+                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                {params.InputProps.endAdornment}
+              </React.Fragment>
+            ),
+          }}
+        />
+      )}
+    />
   );
 }
 

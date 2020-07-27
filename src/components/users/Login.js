@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/GlobalState";
-
 import { Redirect } from "react-router-dom";
 import localAPI from "../../api/localAPI";
 

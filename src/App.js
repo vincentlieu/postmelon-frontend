@@ -7,7 +7,7 @@ import PostMelon from './ui/theme'
 import { Box } from '@material-ui/core';
 import { StateContext } from "./config/GlobalState";
 import stateReducer from "./config/stateReducer";
-
+import NavBar from './layout/NavBar';
 
 function App() {
   const initialState = { posts: [], token: null, userID: null };
@@ -17,6 +17,7 @@ function App() {
     <Box>
       <ThemeProvider theme={PostMelon}>
         <StateContext.Provider value={{ store, dispatch }}>
+          <NavBar/>
           <Router>
             <Switch>
               <Route exact path="/" render={(props) => { return <Landing {...props}/> }} />
