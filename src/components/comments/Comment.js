@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Avatar, Box, Divider, TextField } from '@material-ui/core';
+import { Avatar, Box, Divider, TextField, Typography } from '@material-ui/core';
 import Moment from 'react-moment';
 import CommentMenu from './CommentMenu';
 import { makeStyles } from '@material-ui/core/styles';
@@ -50,8 +50,10 @@ const Comment = ({ comment, postId }) => {
         <Box display='flex' alignItems='center'>
           <Avatar src={comment.avatar} />
           <Box ml={1} className={classes.commentNameTime}>
-            {comment.name}
-            <Moment fromNow>{comment.createdDate}</Moment>
+            <Typography variant='subtitle2'>{comment.name}</Typography>
+            <Typography variant='subtitle2'>
+              <Moment fromNow>{comment.createdDate}</Moment>
+            </Typography>
           </Box>
         </Box>
         {/* COMMENTMENU - MENU OPTIONS - EDIT AND DELETE COMMENT */}
