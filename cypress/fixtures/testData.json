@@ -1,0 +1,6 @@
+{
+    "url": "http://localhost:3000",
+    "email": "abc@gmail.com",
+    "password": "123456",
+    "incorrectPassword": "abcdef"
+}
