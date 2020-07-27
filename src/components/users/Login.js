@@ -55,7 +55,7 @@ function Login() {
       <h1>login</h1>
       <label>Email</label>
       <input
-        className=""
+        className="login-email"
         placeholder="Email"
         type="text"
         value={email}
@@ -65,15 +65,17 @@ function Login() {
       <br></br>
       <label>Password</label>
       <input
-        className=""
+        className="login-password"
         placeholder="Password"
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       ></input>
       {isLogin && <Redirect to="/home"></Redirect>}
-      <button onClick={logInUser}>Login</button>
-      {errorMessage}
+      <button className="login-button" onClick={logInUser}>
+        Login
+      </button>
+      {errorMessage && <div className="error-message"> {errorMessage} </div>}
     </div>
   );
 }

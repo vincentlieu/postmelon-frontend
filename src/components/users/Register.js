@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import localAPI from "../../api/localAPI";
+import { useGlobalState } from "../../config/GlobalState";
 
 function Register() {
+  const { dispatch } = useGlobalState();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
@@ -11,11 +14,8 @@ function Register() {
   const [isCreated, setIscreated] = useState(false);
 
   const sendRequestToRegister = () => {
-    const letters = /^[A-Za-z]+$/;
     if (name === "") {
       SetErrorMessage(" Please fill out name");
-    } else if (!name.match(letters)) {
-      SetErrorMessage("Name can only be letter");
     } else if (email === "") {
       SetErrorMessage("Email can not be emty");
     } else if (password === "") {
@@ -23,15 +23,12 @@ function Register() {
     } else if (password !== confirmPassword) {
       SetErrorMessage("Password does not matched");
     } else {
-      axios
-        .post(
-          `https://cors-anywhere.herokuapp.com/https://postmelon.herokuapp.com/api/users`,
-          {
-            name: name,
-            email: email,
-            password: password,
-          }
-        )
+      localAPI
+        .post(`/users`, {
+          name: name,
+          email: email,
+          password: password,
+        })
         .then((response) => {
           console.log(response.data);
 
@@ -45,6 +42,7 @@ function Register() {
         });
     }
   };
+
   const createUser = () => {
     sendRequestToRegister();
   };
@@ -55,7 +53,7 @@ function Register() {
       <h1>New user</h1>
       <label>Name</label>
       <input
-        className=""
+        className="name"
         placeholder="Name"
         type="text"
         value={name}
@@ -64,7 +62,7 @@ function Register() {
       <br></br>
       <label>Email</label>
       <input
-        className=""
+        className="register-email"
         placeholder="Email"
         type="text"
         value={email}
@@ -73,7 +71,7 @@ function Register() {
       <br></br>
       <label>Password</label>
       <input
-        className=""
+        className="register-password"
         placeholder="Password"
         type="password"
         value={password}
@@ -82,15 +80,19 @@ function Register() {
       <br></br>
       <label>Confirm Password</label>
       <input
-        className=""
+        className="confirm-password"
         placeholder="Password"
         type="password"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       ></input>
-      <button onClick={createUser}>Submit</button>
+      <button className="register-button" onClick={createUser}>
+        Submit
+      </button>
       {isCreated && <Redirect to="/home"></Redirect>}
-      {errorMessage}
+      {errorMessage && (
+        <div className="error-message-register"> {errorMessage} </div>
+      )}
       <br></br>
     </div>
   );
