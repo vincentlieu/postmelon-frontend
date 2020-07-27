@@ -102,7 +102,7 @@ const ShowPost = ({ post, deletePost, userId }) => {
             onChange={(event) => setNewPostContent(event.target.value)}
           />
         ) : (
-          <Box>{post.content}</Box>
+            <Typography paragraph={true}>{post.content}</Typography>
         )}
         <Box display='flex' justifyContent='flex-end'>
           <div>Likes: {post.likes.length} </div>
