@@ -4,6 +4,7 @@ import Moment from 'react-moment';
 import CommentMenu from './CommentMenu';
 import { makeStyles } from '@material-ui/core/styles';
 import EditComment from './EditComment';
+import { useGlobalState } from '../../config/GlobalState';
 
 const useStyles = makeStyles((theme) => ({
   commentContainer: {
@@ -36,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
 const Comment = ({ comment, postId }) => {
   const [editCommentFlag, setEditCommentFlag] = useState(false);
   const [editCommentValue, setEditCommentValue] = useState('');
+  const {store} = useGlobalState();
+  const { userID } = store;
   const classes = useStyles();
 
   function editComment(comment) {
@@ -71,11 +74,11 @@ const Comment = ({ comment, postId }) => {
               />
             </Box>
           )}
-          <CommentMenu
+          {userID === comment.user ? <CommentMenu
             commentId={comment._id}
             postId={postId}
             editComment={() => editComment(comment)}
-          />
+          /> : <Box />}
         </Box>
       </Box>
 

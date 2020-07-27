@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ShowPost = ({ post, deletePost, userId }) => {
+const ShowPost = ({ post, deletePost, userID }) => {
   const [editPostFlag, setEditPostFlag] = useState(false);
   const [newPostContent, setNewPostContent] = useState(post.content);
   const [comments, setComments] = useState(false);
@@ -84,11 +84,15 @@ const ShowPost = ({ post, deletePost, userId }) => {
                 />
               </Box>
             )}
-            <PostMenu
-              postId={post._id}
-              onDelete={deletePost}
-              editPost={() => resetEdit()}
-            />
+            {userID === post.authorId ? (
+              <PostMenu
+                postId={post._id}
+                onDelete={deletePost}
+                editPost={() => resetEdit()}
+              />
+            ) : (
+              <Box />
+            )}
           </Box>
         </Box>
 
@@ -102,7 +106,7 @@ const ShowPost = ({ post, deletePost, userId }) => {
             onChange={(event) => setNewPostContent(event.target.value)}
           />
         ) : (
-            <Typography paragraph={true}>{post.content}</Typography>
+          <Typography paragraph={true}>{post.content}</Typography>
         )}
         <Box display='flex' justifyContent='flex-end'>
           <div>Likes: {post.likes.length} </div>
