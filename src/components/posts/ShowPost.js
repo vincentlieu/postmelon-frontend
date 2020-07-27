@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
-import { Paper, Box, Avatar, Divider, Button, Typography, TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import LikePost from './LikePost';
-import Moment from 'react-moment';
-import ShowComments from '../comments/ShowComments';
-import MessageIcon from '@material-ui/icons/Message';
-import EditPost from './EditPost';
-import PostMenu from './PostMenu';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import React, { useState } from "react";
+import {
+  Paper,
+  Box,
+  Avatar,
+  Divider,
+  Button,
+  Typography,
+  TextField,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import LikePost from "./LikePost";
+import Moment from "react-moment";
+import ShowComments from "../comments/ShowComments";
+import MessageIcon from "@material-ui/icons/Message";
+import EditPost from "./EditPost";
+import PostMenu from "./PostMenu";
+import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -15,31 +23,31 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   postContainer: {
-    width: '100%',
-    justifyContent: 'space-between',
+    width: "100%",
+    justifyContent: "space-between",
   },
   postHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '1rem',
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "1rem",
   },
   postAuthor: {
-    marginRight: '10px',
-    display: 'flex',
+    marginRight: "10px",
+    display: "flex",
   },
   postTime: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
   },
   postMenu: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center'
+    display: "flex",
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   postOptions: {
-    display : 'flex',
-    justifyContent: 'space-around'
-  }
+    display: "flex",
+    justifyContent: "space-around",
+  },
 }));
 
 const ShowPost = ({ post, deletePost, userID }) => {
@@ -59,15 +67,15 @@ const ShowPost = ({ post, deletePost, userID }) => {
       <Box className={classes.postContainer}>
         {/* POSTHEADER - AVATAR, NAME, TIMESTAMP, DELETE, EDIT */}
         <Box className={classes.postHeader}>
-          <Box display='flex' alignItems='center'>
+          <Box display="flex" alignItems="center">
             <Avatar
-              alt='profile-image'
+              alt="profile-image"
               src={post.avatar}
               className={classes.postAuthor}
             />
             <Box className={classes.postTime}>
-              <Typography variant='h6'>{post.name}</Typography>
-              <Typography variant='subtitle2'>
+              <Typography variant="h6">{post.name}</Typography>
+              <Typography variant="subtitle2">
                 <Moment fromNow>{post.date}</Moment>
               </Typography>
             </Box>
@@ -102,20 +110,20 @@ const ShowPost = ({ post, deletePost, userID }) => {
           <TextField
             fullWidth={true}
             multiline={true}
-            variant='outlined'
+            variant="outlined"
             value={newPostContent}
             onChange={(event) => setNewPostContent(event.target.value)}
           />
         ) : (
           <Typography paragraph={true}>{post.content}</Typography>
         )}
-        <Box display='flex' justifyContent='flex-end'>
-          <Box display='flex' alignItems='center' m={0.5}>
-            <ThumbUpAltIcon color='primary' fontSize='small' />
+        <Box display="flex" justifyContent="flex-end">
+          <Box display="flex" alignItems="center" m={0.5}>
+            <ThumbUpAltIcon color="primary" fontSize="small" />
             {post.likes.length}
           </Box>
-          <Box display='flex' alignItems='center'>
-            <MessageIcon color='primary' fontSize='small' />
+          <Box display="flex" alignItems="center">
+            <MessageIcon color="primary" fontSize="small" />
             {post.comments.length}
           </Box>
         </Box>
@@ -127,7 +135,8 @@ const ShowPost = ({ post, deletePost, userID }) => {
           <Button
             onClick={() => setComments(!comments)}
             fullWidth
-            startIcon={<MessageIcon />}>
+            startIcon={<MessageIcon />}
+          >
             Comment
           </Button>
         </Box>

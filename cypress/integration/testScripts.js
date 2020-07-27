@@ -1,4 +1,9 @@
-import { url, email, password, incorrectPassword } from '../fixtures/testData.json'
+import {
+  url,
+  email,
+  password,
+  incorrectPassword,
+} from "../fixtures/testData.json";
 
 describe("Login", function () {
   it("Successful redirected to home page  when enter correct user name and password", function () {
@@ -38,24 +43,24 @@ describe("Login", function () {
 });
 
 describe("Sign up", function () {
-//     it("Successful registerd user redirect to home page", function () {
-//       cy.visit(url)
-//       cy.get(".name").type("newuser");
+  //     it("Successful registerd user redirect to home page", function () {
+  //       cy.visit(url)
+  //       cy.get(".name").type("newuser");
 
-//       function rand() {
-//         const random = Math.random() * 100;
-//         return random
-//       }
+  //       function rand() {
+  //         const random = Math.random() * 100;
+  //         return random
+  //       }
 
-//       cy.get(".register-email").type(`newuser${rand()}@gmail.com`);
+  //       cy.get(".register-email").type(`newuser${rand()}@gmail.com`);
 
-//       cy.get(".register-password").type("123456");
-//       cy.get(".confirm-password").type("123456");
+  //       cy.get(".register-password").type("123456");
+  //       cy.get(".confirm-password").type("123456");
 
-//       cy.get(".register-button").click();
+  //       cy.get(".register-button").click();
 
-//       cy.url().should("include", "/home");
-//     });
+  //       cy.url().should("include", "/home");
+  //     });
 
   it("Error when name field is empty", function () {
     cy.visit(url);
@@ -101,7 +106,7 @@ describe("Sign up", function () {
     cy.get(".name").type("new user");
     cy.get(".register-email").type("newuser@gmail.com");
     cy.get(".register-password").type(password);
-    cy.get('.confirm-password').type(incorrectPassword);
+    cy.get(".confirm-password").type(incorrectPassword);
 
     cy.get(".register-button").click();
 
@@ -115,7 +120,7 @@ describe("Sign up", function () {
 });
 
 describe("Create Post", function () {
-  it("Successful redirected to home when using correct user name and password", function () {
+  it("Successful Login user can create post", function () {
     cy.visit(url);
 
     cy.get(".login-email").type(email);
@@ -125,12 +130,14 @@ describe("Create Post", function () {
     cy.get(".login-button").click();
 
     cy.url().should("include", "/home");
+    cy.get(".create-post").type("create new post");
+    cy.get("[data-cy=post-button]").click();
+    cy.get("h6").first().should("contain", "patricia");
   });
-
-  it("login user can create a post", function () {
+  it("Post filed can not be empty", function () {
     cy.visit(url);
 
-    cy.get('.login-email').type(email);
+    cy.get(".login-email").type(email);
 
     cy.get(".login-password").type(password);
 
@@ -138,8 +145,7 @@ describe("Create Post", function () {
 
     cy.url().should("include", "/home");
 
-    cy.get(".create-post").type("create new post");
     cy.get("[data-cy=post-button]").click();
-    cy.get("[data-cy=post]");
+    cy.get("label").should("contain", "Post content required.");
   });
 });
