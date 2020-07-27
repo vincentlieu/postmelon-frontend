@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 import localAPI from '../../api/localAPI';
 import DeletePost from '../posts/DeletePost';
 import Moment from 'react-moment';
@@ -25,7 +26,7 @@ const ShowPosts = () => {
   useEffect(() => {
     localAPI.get('/posts/')
       .then((posts) => setPosts(posts.data));
-  }, [posts]);
+  }, []);
 
   return posts.map((post) => (
     <Paper className={classes.paper}>
@@ -33,7 +34,13 @@ const ShowPosts = () => {
         <Grid item container>
           <Box width={1}>
             <Box container display='flex' justifyContent='space-between'>
+            <Link 
+            to={`/profile/user/${post.authorId}`}
+            >
+            Show profile
+            </Link>
               {post.authorId}
+            
                 <DeletePost
                   postId={post._id}
                   onDelete={() =>
@@ -54,6 +61,7 @@ const ShowPosts = () => {
         </Grid>
         <Grid item></Grid>
       </Grid>
+
     </Paper>
   ));
 };
