@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { Avatar, Box, Divider, TextField, Typography } from '@material-ui/core';
+import React, { useState, forwardRef } from 'react';
+import { Avatar, Box, Divider, TextField, Typography, Link } from '@material-ui/core';
 import Moment from 'react-moment';
 import CommentMenu from './CommentMenu';
 import { makeStyles } from '@material-ui/core/styles';
 import EditComment from './EditComment';
 import { useGlobalState } from '../../config/GlobalState';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   commentContainer: {
@@ -41,6 +42,13 @@ const Comment = ({ comment, postId }) => {
   const { userID } = store;
   const classes = useStyles();
 
+   const LinkBehaviour = forwardRef((props, ref) => (
+     <RouterLink
+       ref={ref}
+       to={`/profile/user/${comment.user}`}
+       {...props}></RouterLink>
+   ));
+
   function editComment(comment) {
     setEditCommentFlag(!editCommentFlag);
     setEditCommentValue(comment.content);
@@ -53,7 +61,12 @@ const Comment = ({ comment, postId }) => {
         <Box display='flex' alignItems='center'>
           <Avatar src={comment.avatar} />
           <Box ml={1} className={classes.commentNameTime}>
-            <Typography variant='subtitle2'>{comment.name}</Typography>
+            <Link
+              component={LinkBehaviour}
+              variant='subtitle2'
+              underline='none'>
+              {comment.name}
+            </Link>
             <Typography variant='subtitle2'>
               <Moment fromNow>{comment.createdDate}</Moment>
             </Typography>
@@ -74,11 +87,15 @@ const Comment = ({ comment, postId }) => {
               />
             </Box>
           )}
-          {userID === comment.user ? <CommentMenu
-            commentId={comment._id}
-            postId={postId}
-            editComment={() => editComment(comment)}
-          /> : <Box />}
+          {userID === comment.user ? (
+            <CommentMenu
+              commentId={comment._id}
+              postId={postId}
+              editComment={() => editComment(comment)}
+            />
+          ) : (
+            <Box />
+          )}
         </Box>
       </Box>
 

@@ -3,7 +3,6 @@ import { Container } from "@material-ui/core";
 import CreatePost from "../components/posts/CreatePost";
 import ShowPost from "../components/posts/ShowPost";
 import { CircularProgress } from "@material-ui/core";
-import NavBar from "./NavBar";
 import { useGlobalState } from "../../src/config/GlobalState";
 import localAPI from "../api/localAPI";
 
@@ -37,7 +36,6 @@ const Home = () => {
   return (
     <Container maxWidth="sm">
       <h1>Home {userID}</h1>
-
       <CreatePost />
       <>{!isLoading ? renderPosts() : renderLoading()}</>
       {/* {sessionStorage.removeItem("token") */}

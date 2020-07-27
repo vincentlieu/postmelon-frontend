@@ -1,20 +1,18 @@
-import React, { useState } from "react";
-import { useGlobalState } from "../../config/GlobalState";
-import { Redirect } from "react-router-dom";
-import localAPI from "../../api/localAPI";
+import React, { useState } from 'react';
+import { useGlobalState } from '../../config/GlobalState';
+import localAPI from '../../api/localAPI';
 
 function Login({ history }) {
   const { dispatch } = useGlobalState();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, SetErrorMessage] = useState("");
-  const [isLogin, setIslogin] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, SetErrorMessage] = useState('');
 
   const sendRequestToLogIn = () => {
-    if (email === "") {
-      SetErrorMessage("Email can not be emty");
-    } else if (password === "") {
-      SetErrorMessage("Password can not be emty");
+    if (email === '') {
+      SetErrorMessage('Email can not be emty');
+    } else if (password === '') {
+      SetErrorMessage('Password can not be emty');
     } else {
       localAPI
         .post(`/auth`, {
@@ -22,37 +20,17 @@ function Login({ history }) {
           password: password,
         })
         .then((res) => {
-          sessionStorage.setItem("token", res.data.token);
-          // console.log(res);
-          dispatch(
-            { type: 'setToken', data: res.data.token }
-          )
+          sessionStorage.setItem('token', res.data.token);
+          dispatch({ type: 'setToken', data: res.data.token });
           dispatch({ type: 'getUserID', data: res.data.userId });
-          history.push('/home')
-          setIslogin(true);
+          history.push('/home');
         })
         .catch((err) => {
-          SetErrorMessage(" Server Error Please try again");
+          SetErrorMessage(' Server Error Please try again');
           console.log(err);
         });
     }
   };
-
-  // const getUserId = () => {
-  //   localAPI
-  //     .get(`/auth`)
-  //     .then((res) => {
-  //       dispatch({ type: "getUserID", data: res.data._id });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-  // const logInUser = () => {
-
-  //   sendRequestToLogIn();
-  //       getUserId();
-  // };
 
   return (
     <div>
@@ -73,7 +51,6 @@ function Login({ history }) {
         type='password'
         value={password}
         onChange={(e) => setPassword(e.target.value)}></input>
-      {/* {isLogin && <Redirect to="/home"></Redirect>} */}
       <button className='login-button' onClick={sendRequestToLogIn}>
         Login
       </button>

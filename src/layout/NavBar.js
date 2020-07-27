@@ -22,11 +22,11 @@ function NavBar() {
       });
   }, []);
 
-  function userProfile() {
-    return (
-      <Redirect to={``}/>
-    )
-  }
+  // function showProfile(userId) {
+  //   return(
+  //     <Redirect to={`/profile/user/${userId}`}></Redirect>
+  //   )
+  // }
 
   return (
     <Autocomplete
@@ -38,19 +38,23 @@ function NavBar() {
       onClose={() => {
         setOpen(false);
       }}
-      getOptionSelected={(option, value) => (console.log(value.name))}
+      getOptionSelected={(option, value) => (
+        <Redirect to={`/profile/user/${option._id}`} ></Redirect>
+      )}
       getOptionLabel={(option) => option.name}
       options={options}
       loading={loading}
       renderInput={(params) => (
         <TextField
           {...params}
-          variant="outlined"
+          variant='outlined'
           InputProps={{
             ...params.InputProps,
             endAdornment: (
               <React.Fragment>
-                {loading ? <CircularProgress color="inherit" size={20} /> : null}
+                {loading ? (
+                  <CircularProgress color='inherit' size={20} />
+                ) : null}
                 {params.InputProps.endAdornment}
               </React.Fragment>
             ),
