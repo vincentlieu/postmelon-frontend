@@ -1,38 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+
+import { Redirect } from "react-router-dom";
 import localAPI from "../api/localAPI";
 
 function NavBar() {
-  const [searchs, setSearchs] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-  useEffect(() => {
-    localAPI
-      .get(`/users`)
-      .then((res) => {
-        setSearchs(res.data);
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const signOut = () => {};
+  const createProfile = () => {};
 
-  return searchs ? (
-    <section>
-      <div>
-        {searchs.map((search) => (
-          <li>{search.name}</li>
-        ))}
-      </div>
-      <input
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
-      {/* {searchValue && setSearchs.filter(r => r.includes(searchValue)).map(t => <li>{t}</li>)} */}
-    </section>
-  ) : (
-    <section>
-      <h1>Not Found! Please try different name </h1>
-    </section>
+  return (
+    <div>
+      <h1>Nav Bar</h1>
+      <button className="" onClick={signOut}>
+        Sign Out
+      </button>
+      <button className="" onClick={createProfile}>
+        Create/Update Profile
+      </button>
+    </div>
   );
 }
 
