@@ -84,11 +84,11 @@ const ShowPost = ({ post, deletePost, userId }) => {
                 />
               </Box>
             )}
-              <PostMenu
-                postId={post._id}
-                onDelete={deletePost}
-                editPost={() => resetEdit()}
-              />
+            <PostMenu
+              postId={post._id}
+              onDelete={deletePost}
+              editPost={() => resetEdit()}
+            />
           </Box>
         </Box>
 

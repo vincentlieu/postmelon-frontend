@@ -33,9 +33,9 @@ const EditComment = ({
 
   return (
     <div>
-      <IconButton color='primary' onClick={onSubmit}>
+      {commentContent && <IconButton color='primary' onClick={onSubmit}>
         <SaveIcon />
-      </IconButton>
+      </IconButton>}
       <IconButton onClick={commentFlag}>
         <CancelIcon />
       </IconButton>

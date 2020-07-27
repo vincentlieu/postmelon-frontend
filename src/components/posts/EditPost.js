@@ -10,23 +10,23 @@ const EditPost = ({ value, postId, confirmChange, setNewPostContent, cancelChang
     const { posts } = store;
 
   function onSubmit() {
-    localAPI.put(`/posts/${postId}`, { content: value })
-      .then((post) => {
-        const otherPosts = posts.filter((p) => p._id !== post.data._id);
-        dispatch({
-          type: 'editPost',
-          data: [post.data ,...otherPosts]
+      localAPI.put(`/posts/${postId}`, { content: value })
+        .then((post) => {
+          const otherPosts = posts.filter((p) => p._id !== post.data._id);
+          dispatch({
+            type: 'editPost',
+            data: [post.data, ...otherPosts]
+          })
         })
-      })
-      .then(confirmChange)
-      .then(setNewPostContent)
+        .then(confirmChange)
+        .then(setNewPostContent)
   }
   
     return (
       <div>
-        <IconButton onClick={onSubmit} color='primary'>
+        {value && <IconButton onClick={onSubmit} color='primary'>
           <SaveIcon />
-        </IconButton>
+        </IconButton>}
         <IconButton
         onClick={cancelChange}
         >
