@@ -1,6 +1,8 @@
+import name from "../fixtures/example.json";
+
 describe("Login", function () {
   it("Successful redirected to home page  when enter correct user name and password", function () {
-    cy.visit("http://localhost:3001");
+    cy.visit("http://localhost:3000");
 
     cy.get(".login-email").type("abc@gmail.com");
 
@@ -12,7 +14,7 @@ describe("Login", function () {
   });
 
   it(" Error when password emty", function () {
-    cy.visit("http://localhost:3001");
+    cy.visit("http://localhost:3000");
     cy.get(".login-email").type("abc@gmail.com");
 
     cy.get(".login-button").click();
@@ -23,7 +25,7 @@ describe("Login", function () {
   });
 
   it("Error when enter incorrect email or password", function () {
-    cy.visit("http://localhost:3001");
+    cy.visit("http://localhost:3000");
     cy.get(".login-email").type("abc@gmail.com");
     cy.get(".login-password").type("123457");
 
@@ -51,7 +53,7 @@ describe("Sign up", function () {
   //   });
 
   it("Error when name field is empty", function () {
-    cy.visit("http://localhost:3001");
+    cy.visit("http://localhost:3000");
 
     cy.get(".name");
 
@@ -63,7 +65,7 @@ describe("Sign up", function () {
   });
 
   it("Error when email field is empty", function () {
-    cy.visit("http://localhost:3001");
+    cy.visit("http://localhost:3000");
     cy.get(".name").type("new user");
 
     cy.get(".register-button").click();
@@ -76,7 +78,7 @@ describe("Sign up", function () {
     );
   });
   it("Error when password field is empty", function () {
-    cy.visit("http://localhost:3001");
+    cy.visit("http://localhost:3000");
     cy.get(".name").type("new user");
     cy.get(".register-email").type("newuser@gmail.com");
 
@@ -90,7 +92,7 @@ describe("Sign up", function () {
     );
   });
   it("Error when password does not match confirm password", function () {
-    cy.visit("http://localhost:3001");
+    cy.visit("http://localhost:3000");
     cy.get(".name").type("new user");
     cy.get(".register-email").type("newuser@gmail.com");
     cy.get(".register-password").type("123456");
@@ -109,7 +111,7 @@ describe("Sign up", function () {
 
 describe("Create Post", function () {
   it("Successful redirected to home when using correct user name and password", function () {
-    cy.visit("http://localhost:3001");
+    cy.visit("http://localhost:3000");
 
     cy.get(".login-email").type("abc@gmail.com");
 
@@ -121,7 +123,7 @@ describe("Create Post", function () {
   });
 
   it("login user can create a post", function () {
-    cy.visit("http://localhost:3001");
+    cy.visit("http://localhost:3000");
 
     cy.get(".login-email").type("abc@gmail.com");
 
