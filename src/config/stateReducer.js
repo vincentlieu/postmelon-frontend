@@ -27,6 +27,9 @@ export default (state, action) => {
     case 'getUserID': {
       return { ...state, userID: action.data };
     }
+    case 'setToken': {
+      return { ...state, token: action.data };
+    }
 
     default:
       return state;
