@@ -18,7 +18,6 @@ function App() {
     <Box>
       <ThemeProvider theme={PostMelon}>
         <StateContext.Provider value={{ store, dispatch }}>
-          <NavBar />
           <Router>
             <Switch>
               <Route
@@ -36,6 +35,7 @@ function App() {
                   return <Home {...props} />;
                 }}
               />
+              <Route exact path="/profile/user/:id" component={Profile} />
             </Switch>
           </Router>
         </StateContext.Provider>

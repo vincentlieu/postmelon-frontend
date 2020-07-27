@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect } from "react";
+
+import { Redirect } from "react-router-dom";
 import localAPI from "../api/localAPI";
 import { TextField } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { Redirect } from 'react-router-dom';
 
 function NavBar() {
 

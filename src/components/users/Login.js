@@ -37,24 +37,25 @@ function Login({ history }) {
       <h1>login</h1>
       <label>Email</label>
       <input
-        className='login-email'
-        placeholder='Email'
-        type='text'
+        className="login-email"
+        placeholder="Email"
+        type="text"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}></input>
+        onChange={(e) => setEmail(e.target.value)}
+      ></input>
 
       <br></br>
       <label>Password</label>
       <input
-        className='login-password'
-        placeholder='Password'
-        type='password'
+        className="login-password"
+        placeholder="Password"
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}></input>
       <button className='login-button' onClick={sendRequestToLogIn}>
         Login
       </button>
-      {errorMessage && <div className='error-message'> {errorMessage} </div>}
+      {errorMessage && <div className="error-message"> {errorMessage} </div>}
     </div>
   );
 }
