@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DeleteComment from './DeleteComment';
 
-const CommentMenu = ({ postId, commentId }) => {
+const CommentMenu = ({ postId, commentId, editComment }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
@@ -39,7 +39,7 @@ const CommentMenu = ({ postId, commentId }) => {
         }}
         open={open}
         onClose={handleClose}>
-        <MenuItem key={'option'}>
+              <MenuItem key={'option'} onClick={editComment}>
           Edit Comment
         </MenuItem>
         <DeleteComment postId={postId} commentId={commentId} />

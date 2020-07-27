@@ -32,7 +32,8 @@ const CreatePost = () => {
         .post("/posts/", { content: post })
         .then((post) => {
           dispatch({ type: "addPost", data: [post.data, ...posts] });
-          setPost("");
+          setPost("")
+          setError("")
         })
         .catch((error) => setError(error.response.data.errors[0].msg));
     } else {

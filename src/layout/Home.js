@@ -23,8 +23,13 @@ const Home = ({ posts, isLoading }) => {
   }
 
   return (
+<<<<<<< HEAD
     <Container maxWidth="sm">
       <h1>Home</h1>
+=======
+    <Container maxWidth='sm'>
+      <h1>Home {userID}</h1>
+>>>>>>> a16f8e896e091ec3326cf994cba703cd57f25a19
       <CreatePost />
       <>{!isLoading ? renderPosts() : renderLoading()}</>
       {/* {sessionStorage.removeItem("token") */}
