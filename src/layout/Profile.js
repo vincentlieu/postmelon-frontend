@@ -18,16 +18,16 @@ function Profile() {
         setProfile(response.data);
         console.log(response.data);
 
-        // Get Post that belong to user this user
-        const postByUserId = await localAPI.get(`/posts/${id}`);
-        console.log(postByUserId);
+        // // Get Post that belong to user this user
+        // const postByUserId = await localAPI.get(`/posts/${id}`);
+        // console.log(postByUserId);
 
         // // get user details
-        const res = await localAPI.get(`/auth`);
+        const res = await localAPI.get(`/users/${id}`);
         setUserDetails(res.data);
         setUserFriends(res.data.friends);
 
-        console.log(res.data);
+        console.log(res);
       })();
     } catch (e) {
       console.log(e);
