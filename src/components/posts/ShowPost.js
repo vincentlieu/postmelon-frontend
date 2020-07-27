@@ -7,6 +7,7 @@ import ShowComments from '../comments/ShowComments';
 import MessageIcon from '@material-ui/icons/Message';
 import EditPost from './EditPost';
 import PostMenu from './PostMenu';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -109,7 +110,14 @@ const ShowPost = ({ post, deletePost, userID }) => {
           <Typography paragraph={true}>{post.content}</Typography>
         )}
         <Box display='flex' justifyContent='flex-end'>
-          <div>Likes: {post.likes.length} </div>
+          <Box display='flex' alignItems='center' m={0.5}>
+            <ThumbUpAltIcon color='primary' fontSize='small' />
+            {post.likes.length}
+          </Box>
+          <Box display='flex' alignItems='center'>
+            <MessageIcon color='primary' fontSize='small' />
+            {post.comments.length}
+          </Box>
         </Box>
 
         {/* POST OPTIONS - LIKES AND COMMENTS */}
