@@ -20,24 +20,24 @@ function App() {
       <ThemeProvider theme={PostMelon}>
         <StateContext.Provider value={{ store, dispatch }}>
           <Router>
-            <NavBar />
+            <NavBar/>
             <Switch>
               <Route
                 exact
-                path="/"
+                path='/'
                 render={(props) => {
                   return <Landing {...props} />;
                 }}
               />
-              <Route exact path="/profile/user/:id" component={Profile} />
+              <Route exact path='/profile/user/:id' component={Profile} />
               <Route
                 exact
-                path="/home"
+                path='/home'
                 render={(props) => {
                   return <Home {...props} />;
                 }}
               />
-              <Route exact path="/myprofile/" component={MyProfile} />
+              <Route exact path='/myprofile/' component={MyProfile} />
             </Switch>
           </Router>
         </StateContext.Provider>
