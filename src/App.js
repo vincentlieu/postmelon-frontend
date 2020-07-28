@@ -11,7 +11,6 @@ import NavBar from "./layout/NavBar";
 import Profile from "./layout/Profile";
 import MyProfile from "./layout/MyProfile";
 
-
 function App() {
   const initialState = { posts: [], token: null, userID: null };
   const [store, dispatch] = useReducer(stateReducer, initialState);
@@ -21,7 +20,7 @@ function App() {
       <ThemeProvider theme={PostMelon}>
         <StateContext.Provider value={{ store, dispatch }}>
           <Router>
-            <NavBar/>
+            <NavBar />
             <Switch>
               <Route
                 exact
@@ -38,11 +37,7 @@ function App() {
                   return <Home {...props} />;
                 }}
               />
-<<<<<<< HEAD
               <Route exact path="/myprofile/" component={MyProfile} />
-=======
-              <Route exact path='/profile/user/:id' component={Profile} />
->>>>>>> c43b6de930fbd4d6ca2503d7ea30269a780a0d60
             </Switch>
           </Router>
         </StateContext.Provider>
