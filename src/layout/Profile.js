@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import baseurl from "./../api/localAPI";
+import baseurl from "../api/localAPI";
 import { useGlobalState } from "../config/GlobalState";
-import localAPI from "./../api/localAPI";
+import localAPI from "../api/localAPI";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ShowPost from "../components/posts/ShowPost";
@@ -23,7 +23,7 @@ function Profile() {
         const response = await localAPI.get(`/users/${id}`);
         setUserDetails(response.data);
         setUserFriends(response.data.friends);
-        console.log(response.data.friends);
+
         console.log(response.data);
       })();
     } catch (e) {
@@ -38,8 +38,9 @@ function Profile() {
       <Link to={`/home/`}>Back to home</Link>
       <br></br>
       <button className="">Add Friend</button>
-
+      <h1>my name: {userDetails.name}</h1>
       <h1>my bio: {userDetails.bio}</h1>
+
       <h1>my dob: {userDetails.dob}</h1>
       <h1>Join Date: {userDetails.date}</h1>
 
