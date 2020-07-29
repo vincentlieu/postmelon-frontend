@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import baseurl from "../api/localAPI";
 import { useGlobalState } from "../config/GlobalState";
 import localAPI from "../api/localAPI";
-import { useParams } from "react-router-dom";
-import { Link, Redirect } from "react-router-dom";
+
+import { Redirect } from "react-router-dom";
 
 function EditProfile() {
-  const { store, dispatch } = useGlobalState();
-  const { userID, posts } = store;
+  const { store } = useGlobalState();
+  const { userID } = store;
   const [userDetails, setUserDetails] = useState({ bio: "", name: "" });
   const [isUpdated, setIsUpdateed] = useState(false);
 
