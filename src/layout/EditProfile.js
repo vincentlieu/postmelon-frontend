@@ -8,7 +8,7 @@ import { Link, Redirect } from "react-router-dom";
 function EditProfile() {
   const { store, dispatch } = useGlobalState();
   const { userID, posts } = store;
-  const [userDetails, setUserDetails] = useState({ bio: "", dob: "" });
+  const [userDetails, setUserDetails] = useState({ bio: "", name: "" });
   const [isUpdated, setIsUpdateed] = useState(false);
 
   useEffect(() => {
@@ -36,34 +36,51 @@ function EditProfile() {
       });
   };
   return (
-    <div>
-      <h1>Edit Profile</h1>
-      <label>About Your Self</label>
-      <input
-        className=""
-        placeholder="About Your Self"
-        type="text"
-        value={userDetails.bio}
-        onChange={(e) =>
-          setUserDetails({ ...setUserDetails, bio: e.target.value })
-        }
-      ></input>
+    <div className="container">
+      <div className="card ">
+        <div className="card-body align-self-center mr-3 ">
+          <h5 className="card-title">Edit Profile</h5>
+          <div class="input-group input-group-sm mb-3">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">
+                  Your Name
+                </span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Default"
+                aria-describedby="inputGroup-sizing-default"
+                value={userDetails.name}
+                onChange={(e) =>
+                  setUserDetails({ ...setUserDetails, name: e.target.value })
+                }
+              ></input>
+            </div>
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">
+                About Your Self
+              </span>
+            </div>
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Small"
+              aria-describedby="inputGroup-sizing-sm"
+              value={userDetails.bio}
+              onChange={(e) =>
+                setUserDetails({ ...setUserDetails, bio: e.target.value })
+              }
+            ></input>
+          </div>
 
-      <br></br>
-      <label>Date of birth</label>
-      <input
-        className=""
-        placeholder="Date of birt"
-        type="date"
-        value={userDetails.dob}
-        onChange={(e) =>
-          setUserDetails({ ...setUserDetails, dob: e.target.value })
-        }
-      ></input>
-      <button className="login-button" onClick={updateProfile}>
-        Update
-      </button>
-      {isUpdated && <Redirect to="/home"></Redirect>}
+          <button className="login-button" onClick={updateProfile}>
+            Update
+          </button>
+          {isUpdated && <Redirect to="/home"></Redirect>}
+        </div>
+      </div>
     </div>
   );
 }
