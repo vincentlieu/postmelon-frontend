@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useGlobalState } from "../../config/GlobalState";
-import localAPI from "../../api/localAPI";
-import { TextField } from "@material-ui/core";
+import React, { useState } from 'react';
+import { useGlobalState } from '../../config/GlobalState';
+import localAPI from '../../api/localAPI';
+import {TextField, Box, Button} from '@material-ui/core';
 
 function Login({ history }) {
   const { dispatch } = useGlobalState();
@@ -36,30 +36,36 @@ function Login({ history }) {
   };
 
   return (
-    <div>
+    <Box className='registration-login-container'>
       <TextField
-        className="login-email"
-        placeholder="Email"
-        type="text"
+        fullWidth={true}
+        margin='normal'
+        className='login-email'
+        placeholder='Email'
+        type='text'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
 
-      <br></br>
       <TextField
-        className="login-password"
-        placeholder="Password"
-        type="password"
+        className='login-password'
+        fullWidth={true}
+        margin='normal'
+        placeholder='Password'
+        type='password'
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <br></br>
-      <br></br>
-      <button className="login-button" onClick={sendRequestToLogIn}>
+      <Button
+        className='login-button'
+        onClick={sendRequestToLogIn}
+        fullWidth={true}
+        variant='contained'
+        color='primary'>
         Login
-      </button>
-      {errorMessage && <div className="error-message"> {errorMessage} </div>}
-    </div>
+      </Button>
+      {errorMessage && <Box className='error-message'> {errorMessage} </Box>}
+    </Box>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useGlobalState } from "../../config/GlobalState";
 import { Redirect } from "react-router-dom";
 import localAPI from "../../api/localAPI";
-import { TextField } from "@material-ui/core";
+import { TextField, Box, Button } from "@material-ui/core";
 
 function Register() {
   const { dispatch } = useGlobalState();
@@ -52,47 +52,60 @@ function Register() {
   };
 
   return (
-    <div>
+    <Box className='registration-login-container'>
       <TextField
-        className="name"
-        placeholder="Full Name"
-        type="text"
+        fullWidth={true}
+        className='name'
+        margin='normal'
+        className='registration-field'
+        placeholder='Full name'
+        type='text'
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <br></br>
       <TextField
-        className="register-email"
-        placeholder="Email"
-        type="text"
+        fullWidth={true}
+        className='register-email'
+        margin='normal'
+        className='registration-field'
+        placeholder='Email address'
+        type='text'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <br></br>
       <TextField
-        className="register-password"
-        placeholder="Password"
-        type="password"
+        fullWidth={true}
+        className='register-email'
+        margin='normal'
+        className='registration-field'
+        placeholder='Password'
+        type='password'
         value={password}
         onChange={(e) => setpassword(e.target.value)}
-      />{" "}
-      <br></br>
+      />{' '}
       <TextField
-        className="confirm-password"
-        placeholder="Confirm Password"
-        type="password"
+        fullWidth={true}
+        className='confirm-password'
+        margin='normal'
+        className='registration-field'
+        placeholder='Password confirmation'
+        type='password'
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
-      <button className="register-button" onClick={createUser}>
+      <Button
+        className='register-button'
+        onClick={createUser}
+        fullWidth={true}
+        color='primary'
+        variant='contained'>
         <b>Register</b>
-      </button>
-      {isCreated && <Redirect to="/home"></Redirect>}
+      </Button>
+      {isCreated && <Redirect to='/home'></Redirect>}
       {errorMessage && (
-        <div className="error-message-register"> {errorMessage} </div>
+        <Box className='error-message-register'> {errorMessage} </Box>
       )}
-      <br></br>
-    </div>
+    </Box>
   );
 }
 
