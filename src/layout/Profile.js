@@ -3,13 +3,13 @@ import baseurl from "../api/localAPI";
 import { useGlobalState } from "../config/GlobalState";
 import localAPI from "../api/localAPI";
 import { useParams } from "react-router-dom";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import ShowPost from "../components/posts/ShowPost";
 import Moment from "react-moment";
 
 function Profile() {
-  const { store, dispatch } = useGlobalState();
-  const { userID, posts } = store;
+  const { store } = useGlobalState();
+  const { posts } = store;
   const [userDetails, setUserDetails] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
   const [isDelete, setIsdelete] = useState(false);
@@ -38,12 +38,31 @@ function Profile() {
       (async () => {
         const response = await localAPI.delete(`/users/`);
         setIsdelete(true);
-        console.log(response.data);
       })();
     } catch (e) {
       console.log(e);
     }
   };
+
+  const addfriend = () => {
+    try {
+      (async () => {
+        const response = await localAPI.put(`/users/friend/${id}`);
+      })();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // const removefriend = () => {
+  //   try {
+  //     (async () => {
+  //       const response = await localAPI.put(`/users/unfriend/${id}`);
+  //     })();
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   return userDetails && userFriends ? (
     <div className="container">
@@ -104,6 +123,7 @@ function Profile() {
           </div>
           <div className="col-md align-self-center mr-3 ">
             <button
+              onClick={addfriend}
               type="button"
               className=" btn btn-secondary background-color text-white"
             >
@@ -116,7 +136,6 @@ function Profile() {
               type="button"
               className="btn btn-secondary background-color text-white"
             >
-              {" "}
               <i class="fa fa-trash-o"></i> Account
             </button>
           </div>
