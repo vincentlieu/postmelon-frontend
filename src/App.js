@@ -9,7 +9,7 @@ import { StateContext } from "./config/GlobalState";
 import stateReducer from "./config/stateReducer";
 import NavBar from "./layout/NavBar";
 import Profile from "./layout/Profile";
-import MyProfile from "./layout/MyProfile";
+
 import EditProfile from "./layout/EditProfile";
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
                   return <Home {...props} />;
                 }}
               />
-              <Route exact path="/myprofile/" component={MyProfile} />
+
               <Route exact path="/editprofile/" component={EditProfile} />
             </Switch>
           </Router>

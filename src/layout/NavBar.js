@@ -1,21 +1,20 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, forwardRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
   Toolbar,
-  IconButton,
-  Typography,
-  Badge,
   MenuItem,
   Menu,
-  Button,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+  IconButton,
+  Typography,
+} from "@material-ui/core/";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import MoreIcon from "@material-ui/icons/MoreVert";
+import HomeIcon from "@material-ui/icons/Home";
+import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useGlobalState } from "../config/GlobalState";
-import { Link } from "react-router-dom";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -25,9 +24,11 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    display: "none",
+    textDecoration: "none",
+    color: "inherit",
     [theme.breakpoints.up("sm")]: {
-      display: "block",
+      marginLeft: theme.spacing(3),
+      width: "auto",
     },
   },
   sectionDesktop: {
@@ -42,12 +43,16 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  menuBar: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
 }));
 
-function PrimarySearchAppBar() {
+const NavigationBar = () => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -57,12 +62,9 @@ function PrimarySearchAppBar() {
   const { store, dispatch } = useGlobalState();
   const { userID } = store;
 
+  // HANDLE NAVIGATION BAR MENU OPEN AND CLOSE.
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
   };
 
   const handleMenuClose = () => {
@@ -74,65 +76,88 @@ function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+
   const handleLogout = () => {
     sessionStorage.clear();
     dispatch({ type: "setToken", data: null });
-    dispatch({ type: "setUserId", data: null });
+    dispatch({ type: "getUserId", data: null });
 
     history.push("/");
     handleMenuClose();
   };
-  const menuId = "primary-search-account-menu";
+
+  // ALLOW MATERIAL-UI TO USE REACT-ROUTER-DOM
+  // LINKS TO PROFILE
+  const LinkToProfile = forwardRef((props, ref) => (
+    <RouterLink ref={ref} to={`/profile/${userID}`} {...props}></RouterLink>
+  ));
+
+  //LINKS TO HOME - IF USERID IS NOT PRESENT AND USER CLICKS ON POSTMELON LOGO. IT WILL REDIRECT TO LANDING.
+  const LinkToHome = forwardRef((props, ref) =>
+    userID ? (
+      <RouterLink ref={ref} to={`/home`} {...props}></RouterLink>
+    ) : (
+      <RouterLink ref={ref} to={`/`} {...props}></RouterLink>
+    )
+  );
+
+  // MENU CLICK ACCOUNT ICON TO POPULATE DROPDOWN FOR PROFILE, SETTINGS AND LOGOUT
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>
-        <Link to="/myprofile">Profile</Link>
+      <MenuItem onClick={handleMenuClose} component={LinkToProfile}>
+        Profile
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <Link to="/editprofile"> Edit Profile</Link>
+        <RouterLink to="/editprofile">Settings </RouterLink>
       </MenuItem>
       <MenuItem onClick={handleLogout}>Log out</MenuItem>
     </Menu>
   );
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-
+  // MOBILE MENU
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
       keepMounted
       transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
+      <MenuItem component={LinkToHome}>
+        <IconButton color="inherit">
+          <HomeIcon />
+        </IconButton>
+        <p>Home</p>
+      </MenuItem>
+      <MenuItem component={LinkToProfile}>
+        <IconButton color="inherit">
           <AccountCircle />
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      <MenuItem>
+        <IconButton color="inherit">
+          <SettingsIcon />
+        </IconButton>
+
+        <p>Settings</p>
+      </MenuItem>
       <MenuItem onClick={handleLogout}>
         <IconButton color="inherit">
-          <Badge color="secondary">
-            <ExitToAppIcon />
-          </Badge>
+          <ExitToAppIcon />
         </IconButton>
-        <p>Log out</p>
+        <p>Log off</p>
       </MenuItem>
     </Menu>
   );
@@ -140,40 +165,40 @@ function PrimarySearchAppBar() {
   return (
     <div className={classes.grow}>
       <AppBar position="static">
-        <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
+        <Toolbar className={classes.menuBar}>
+          <Typography
+            className={classes.title}
+            variant="h6"
+            noWrap
+            component={LinkToHome}
+          >
             PostMelon
           </Typography>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-          </div>
+
+          {userID && (
+            <div>
+              <div className={classes.grow} />
+              <div className={classes.sectionDesktop}>
+                <IconButton color="inherit" component={LinkToHome}>
+                  <HomeIcon />
+                </IconButton>
+                <IconButton onClick={handleProfileMenuOpen} color="inherit">
+                  <AccountCircle />
+                </IconButton>
+              </div>
+              <div className={classes.sectionMobile}>
+                <IconButton onClick={handleMobileMenuOpen} color="inherit">
+                  <MoreIcon />
+                </IconButton>
+              </div>
+            </div>
+          )}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
     </div>
   );
-}
+};
 
-export default PrimarySearchAppBar;
+export default NavigationBar;

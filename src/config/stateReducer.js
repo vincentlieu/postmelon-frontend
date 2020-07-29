@@ -1,33 +1,33 @@
 export default (state, action) => {
   switch (action.type) {
-    case 'setPosts': {
+    case "setPosts": {
       return { ...state, posts: action.data };
     }
-    case 'addPost': {
+    case "addPost": {
       return { ...state, posts: action.data };
     }
-    case 'deletePost': {
+    case "deletePost": {
       return { ...state, posts: action.data };
     }
-    case 'editPost': {
+    case "editPost": {
       return { ...state, posts: action.data };
     }
-    case 'likePost': {
+    case "likePost": {
       return { ...state, posts: action.data };
     }
-    case 'addComment': {
+    case "addComment": {
       return { ...state, posts: action.data };
     }
-    case 'deleteComment': {
+    case "deleteComment": {
       return { ...state, posts: action.data };
     }
-    case 'editComment': {
+    case "editComment": {
       return { ...state, posts: action.data };
     }
-    case 'getUserID': {
+    case "getUserID": {
       return { ...state, userID: action.data };
     }
-    case 'setToken': {
+    case "setToken": {
       return { ...state, token: action.data };
     }
 
