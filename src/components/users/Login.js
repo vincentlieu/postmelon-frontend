@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { useGlobalState } from '../../config/GlobalState';
 import localAPI from '../../api/localAPI';
 import {TextField} from '@material-ui/core';
-=======
-import React, { useState } from "react";
-import { useGlobalState } from "../../config/GlobalState";
-import localAPI from "../../api/localAPI";
->>>>>>> 4ef7d84945ec563933e41d06936263c322b54071
 
 function Login({ history }) {
   const { dispatch } = useGlobalState();
