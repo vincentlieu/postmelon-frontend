@@ -1,11 +1,20 @@
 import React, { useState, forwardRef } from "react";
-import { Link as RouterLink } from 'react-router-dom';
-import LikePost from './LikePost';
-import EditPost from './EditPost';
-import PostMenu from './PostMenu';
-import ShowComments from '../comments/ShowComments';
-import Moment from 'react-moment';
-import { Paper, Box, Avatar, Divider, Button, Typography, TextField, Link } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
+import LikePost from "./LikePost";
+import EditPost from "./EditPost";
+import PostMenu from "./PostMenu";
+import ShowComments from "../comments/ShowComments";
+import Moment from "react-moment";
+import {
+  Paper,
+  Box,
+  Avatar,
+  Divider,
+  Button,
+  Typography,
+  TextField,
+  Link,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import MessageIcon from "@material-ui/icons/Message";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
@@ -58,8 +67,9 @@ const ShowPost = ({ post, deletePost, userID }) => {
   const LinkBehaviour = forwardRef((props, ref) => (
     <RouterLink
       ref={ref}
-      to={`/profile/user/${post.authorId}`}
-      {...props}></RouterLink>
+      to={`/profile/${post.authorId}`}
+      {...props}
+    ></RouterLink>
   ));
 
   return (
@@ -67,15 +77,17 @@ const ShowPost = ({ post, deletePost, userID }) => {
       <Box className={classes.postContainer}>
         {/* POSTHEADER - AVATAR, NAME, TIMESTAMP, DELETE, EDIT */}
         <Box className={classes.postHeader}>
-          <Box display='flex' alignItems='center'>
+          <Box display="flex" alignItems="center">
             <Avatar
-              alt='profile-image'
+              alt="profile-image"
               src={post.avatar}
               className={classes.postAuthor}
             />
             <Box className={classes.postTime}>
-              <Link component={LinkBehaviour} variant='h6' underline='none'>{post.name}</Link>
-              <Typography variant='subtitle2'>
+              <Link component={LinkBehaviour} variant="h6" underline="none">
+                {post.name}
+              </Link>
+              <Typography variant="subtitle2">
                 <Moment fromNow>{post.date}</Moment>
               </Typography>
             </Box>
@@ -110,20 +122,21 @@ const ShowPost = ({ post, deletePost, userID }) => {
           <TextField
             fullWidth={true}
             multiline={true}
-            variant='outlined'
+            variant="outlined"
             value={newPostContent}
             onChange={(event) => setNewPostContent(event.target.value)}
           />
         ) : (
           <Typography paragraph={true}>{post.content}</Typography>
         )}
-        <Box display='flex' justifyContent='flex-end'>
-          <Box display='flex' alignItems='center' m={0.5}>
-            <ThumbUpAltIcon color='primary' fontSize='small' />
+        <Box display="flex" justifyContent="flex-end">
+          <Box display="flex" alignItems="center" m={0.5}>
+            <ThumbUpAltIcon color="primary" fontSize="small" />
             {post.likes.length}
           </Box>
-          <Box display='flex' alignItems='center'>
-            <MessageIcon color='primary' fontSize='small' />
+
+          <Box display="flex" alignItems="center">
+            <MessageIcon color="primary" fontSize="small" />
             {post.comments.length}
           </Box>
         </Box>
@@ -135,7 +148,8 @@ const ShowPost = ({ post, deletePost, userID }) => {
           <Button
             onClick={() => setComments(!comments)}
             fullWidth
-            startIcon={<MessageIcon />}>
+            startIcon={<MessageIcon />}
+          >
             Comment
           </Button>
         </Box>
@@ -143,7 +157,11 @@ const ShowPost = ({ post, deletePost, userID }) => {
 
         {/* WHEN COMMENT OPTION IS CLICKED - SHOW/HIDE COMMENTS BENEATH THE POST. */}
         {comments && (
-          <ShowComments postComments={post.comments} postId={post._id} linkBehaviour={LinkBehaviour}/>
+          <ShowComments
+            postComments={post.comments}
+            postId={post._id}
+            linkBehaviour={LinkBehaviour}
+          />
         )}
       </Box>
     </Paper>
