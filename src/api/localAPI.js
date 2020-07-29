@@ -9,10 +9,12 @@ const localAPI = axios.create({
 });
 
 localAPI.interceptors.request.use((request) => {
-  const { token } = sessionStorage;
+  const { token, userId } = sessionStorage;
+
   if (token) {
     request.headers["x-auth-token"] = token;
   }
+
   return request;
 });
 

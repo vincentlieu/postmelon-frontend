@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./layout/Home";
 import Landing from "./layout/Landing";
@@ -9,10 +9,15 @@ import { StateContext } from "./config/GlobalState";
 import stateReducer from "./config/stateReducer";
 import NavBar from "./layout/NavBar";
 import Profile from "./layout/Profile";
-import MyProfile from "./layout/MyProfile";
+
+import EditProfile from "./layout/EditProfile";
 
 function App() {
-  const initialState = { posts: [], token: null, userID: null };
+  const initialState = {
+    posts: [],
+    token: sessionStorage.token || null,
+    userID: sessionStorage.userId || null,
+  };
   const [store, dispatch] = useReducer(stateReducer, initialState);
 
   return (
@@ -20,24 +25,25 @@ function App() {
       <ThemeProvider theme={PostMelon}>
         <StateContext.Provider value={{ store, dispatch }}>
           <Router>
-            <NavBar/>
+            <NavBar />
             <Switch>
               <Route
                 exact
-                path='/'
+                path="/"
                 render={(props) => {
                   return <Landing {...props} />;
                 }}
               />
-              <Route exact path='/profile/user/:id' component={Profile} />
+              <Route exact path="/profile/:id" component={Profile} />
               <Route
                 exact
-                path='/home'
+                path="/home"
                 render={(props) => {
                   return <Home {...props} />;
                 }}
               />
-              <Route exact path='/myprofile/' component={MyProfile} />
+
+              <Route exact path="/editprofile/" component={EditProfile} />
             </Switch>
           </Router>
         </StateContext.Provider>
