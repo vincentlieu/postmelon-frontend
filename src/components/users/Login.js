@@ -1,13 +1,7 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { useGlobalState } from '../../config/GlobalState';
-import localAPI from '../../api/localAPI';
-import {TextField} from '@material-ui/core';
-=======
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/GlobalState";
 import localAPI from "../../api/localAPI";
->>>>>>> 4ef7d84945ec563933e41d06936263c322b54071
+import { TextField } from "@material-ui/core";
 
 function Login({ history }) {
   const { dispatch } = useGlobalState();
@@ -48,8 +42,8 @@ function Login({ history }) {
         placeholder="Email"
         type="text"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}/>
-  
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
       <br></br>
       <TextField
@@ -57,9 +51,11 @@ function Login({ history }) {
         placeholder="Password"
         type="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}/>
-        <br></br><br></br>
-      <button className='login-button' onClick={sendRequestToLogIn}>
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <br></br>
+      <br></br>
+      <button className="login-button" onClick={sendRequestToLogIn}>
         Login
       </button>
       {errorMessage && <div className="error-message"> {errorMessage} </div>}
