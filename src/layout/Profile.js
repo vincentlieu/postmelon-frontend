@@ -33,17 +33,17 @@ function Profile() {
     }
   }, []);
 
-  // const removeUser = () => {
-  //   try {
-  //     (async () => {
-  //       const response = await localAPI.delete(`/users/`);
-  //       setIsdelete(true);
-  //       console.log(response.data);
-  //     })();
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
+  const removeUser = () => {
+    try {
+      (async () => {
+        const response = await localAPI.delete(`/users/`);
+        setIsdelete(true);
+        console.log(response.data);
+      })();
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return userDetails && userFriends ? (
     <div className="container">
@@ -112,7 +112,7 @@ function Profile() {
           </div>
           <div className="col align-self-center mr-3 ">
             <button
-              onClick
+              onClick={removeUser}
               type="button"
               className="btn btn-secondary background-color text-white"
             >
@@ -128,7 +128,7 @@ function Profile() {
           return <ShowPost post={post} />;
         })}
       </div>
-      {/* {isDelete && <Redirect to="/home"></Redirect>} */}
+      {isDelete && <Redirect to="/home"></Redirect>}
     </div>
   ) : (
     <div>
