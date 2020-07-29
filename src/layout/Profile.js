@@ -49,14 +49,14 @@ function Profile() {
     <div className="container">
       <div className="card">
         <div className="row">
-          <div className="col">
+          <div className="col-md">
             <img
               className=" display-img img-thumbnail rounded mx-auto d-block"
               src={userDetails.avatar}
               alt="profile image "
             ></img>
           </div>
-          <div className="col">
+          <div className="col-md">
             <div className="card-body">
               <h3 className="card-title">{userDetails.name}</h3>
               <p className="card-text">About Me: {userDetails.bio}</p>
@@ -66,14 +66,14 @@ function Profile() {
               </p>
 
               <div className="row">
-                <div className="col">
+                <div className="col-md">
                   <p>Posts:{userPosts.length}</p>
                 </div>
 
-                <div className="col">
+                <div className="col-md">
                   <p>Likes</p>
                 </div>
-                <div className="col">
+                <div className="col-md">
                   <div className="dropdown">
                     <button
                       className=" btn btn-secondary background-color dropdown-toggle btn "
@@ -102,7 +102,7 @@ function Profile() {
               </div>
             </div>
           </div>
-          <div className="col align-self-center mr-3 ">
+          <div className="col-md align-self-center mr-3 ">
             <button
               type="button"
               className=" btn btn-secondary background-color text-white"
@@ -110,7 +110,7 @@ function Profile() {
               add friend
             </button>
           </div>
-          <div className="col align-self-center mr-3 ">
+          <div className="col-md align-self-center mr-3 ">
             <button
               onClick={removeUser}
               type="button"
