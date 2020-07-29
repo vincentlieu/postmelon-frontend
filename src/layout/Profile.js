@@ -3,13 +3,13 @@ import baseurl from "../api/localAPI";
 import { useGlobalState } from "../config/GlobalState";
 import localAPI from "../api/localAPI";
 import { useParams } from "react-router-dom";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import ShowPost from "../components/posts/ShowPost";
 import Moment from "react-moment";
 
 function Profile() {
-  const { store, dispatch } = useGlobalState();
-  const { userID, posts } = store;
+  const { store } = useGlobalState();
+  const { posts } = store;
   const [userDetails, setUserDetails] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
   const [isDelete, setIsdelete] = useState(false);
@@ -38,25 +38,44 @@ function Profile() {
       (async () => {
         const response = await localAPI.delete(`/users/`);
         setIsdelete(true);
-        console.log(response.data);
       })();
     } catch (e) {
       console.log(e);
     }
   };
 
+  const addfriend = () => {
+    try {
+      (async () => {
+        const response = await localAPI.put(`/users/friend/${id}`);
+      })();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // const removefriend = () => {
+  //   try {
+  //     (async () => {
+  //       const response = await localAPI.put(`/users/unfriend/${id}`);
+  //     })();
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+
   return userDetails && userFriends ? (
     <div className="container">
       <div className="card">
         <div className="row">
-          <div className="col">
+          <div className="col-md">
             <img
               className=" display-img img-thumbnail rounded mx-auto d-block"
               src={userDetails.avatar}
               alt="profile image "
             ></img>
           </div>
-          <div className="col">
+          <div className="col-md">
             <div className="card-body">
               <h3 className="card-title">{userDetails.name}</h3>
               <p className="card-text">About Me: {userDetails.bio}</p>
@@ -66,14 +85,14 @@ function Profile() {
               </p>
 
               <div className="row">
-                <div className="col">
+                <div className="col-md">
                   <p>Posts:{userPosts.length}</p>
                 </div>
 
-                <div className="col">
+                <div className="col-md">
                   <p>Likes</p>
                 </div>
-                <div className="col">
+                <div className="col-md">
                   <div className="dropdown">
                     <button
                       className=" btn btn-secondary background-color dropdown-toggle btn "
@@ -102,21 +121,21 @@ function Profile() {
               </div>
             </div>
           </div>
-          <div className="col align-self-center mr-3 ">
+          <div className="col-md align-self-center mr-3 ">
             <button
+              onClick={addfriend}
               type="button"
               className=" btn btn-secondary background-color text-white"
             >
               add friend
             </button>
           </div>
-          <div className="col align-self-center mr-3 ">
+          <div className="col-md align-self-center mr-3 ">
             <button
               onClick={removeUser}
               type="button"
               className="btn btn-secondary background-color text-white"
             >
-              {" "}
               <i class="fa fa-trash-o"></i> Account
             </button>
           </div>
