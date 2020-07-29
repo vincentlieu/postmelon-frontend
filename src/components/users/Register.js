@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import localAPI from '../../api/localAPI';
+import {TextField} from '@material-ui/core';
 
 function Register() {
   const [name, setName] = useState('');
@@ -46,41 +47,37 @@ function Register() {
 
   return (
     <div>
-      <h1>register</h1>
-      <h1>New user</h1>
-      <label>Name</label>
-      <input
+      <TextField
         className='name'
-        placeholder='Name'
+        placeholder='Full Name'
         type='text'
         value={name}
-        onChange={(e) => setName(e.target.value)}></input>
+        onChange={(e) => setName(e.target.value)}/>
       <br></br>
-      <label>Email</label>
-      <input
+      <TextField
         className='register-email'
         placeholder='Email'
         type='text'
         value={email}
-        onChange={(e) => setEmail(e.target.value)}></input>
+        onChange={(e) => setEmail(e.target.value)}/>
       <br></br>
-      <label>Password</label>
-      <input
+      <TextField
+
         className='register-password'
         placeholder='Password'
         type='password'
         value={password}
-        onChange={(e) => setpassword(e.target.value)}></input>{' '}
+        onChange={(e) => setpassword(e.target.value)}/>{' '}
       <br></br>
-      <label>Confirm Password</label>
-      <input
+      <TextField
+
         className='confirm-password'
-        placeholder='Password'
+        placeholder='Confirm Password'
         type='password'
         value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}></input>
+        onChange={(e) => setConfirmPassword(e.target.value)}/>
       <button className='register-button' onClick={createUser}>
-        Submit
+      <b>Register</b>
       </button>
       {isCreated && <Redirect to='/home'></Redirect>}
       {errorMessage && (

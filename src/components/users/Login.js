@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useGlobalState } from '../../config/GlobalState';
 import localAPI from '../../api/localAPI';
+import {TextField} from '@material-ui/core';
 
 function Login({ history }) {
   const { dispatch } = useGlobalState();
@@ -34,24 +35,22 @@ function Login({ history }) {
 
   return (
     <div>
-      <h1>login</h1>
-      <label>Email</label>
-      <input
+      <TextField
         className="login-email"
         placeholder="Email"
         type="text"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      ></input>
+        onChange={(e) => setEmail(e.target.value)}/>
+  
 
       <br></br>
-      <label>Password</label>
-      <input
+      <TextField
         className="login-password"
         placeholder="Password"
         type="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}></input>
+        onChange={(e) => setPassword(e.target.value)}/>
+        <br></br><br></br>
       <button className='login-button' onClick={sendRequestToLogIn}>
         Login
       </button>
