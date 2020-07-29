@@ -1,6 +1,16 @@
 {
-  "url": "http://localhost:3000",
-  "email": "patricia@gmail.com",
-  "password": "123456",
-  "incorrectPassword": "abcdef"
+  "auth": {
+    "validEmail": "patricia@gmail.com",
+    "validPassword": "123456",
+    "invalidEmail": "zzakidla@gmail.com",
+    "invalidPassword": "abcdefg"
+  },
+  "registration": {
+    "name": "Cypress Test",
+    "email": "cypresstest@postmelontest.com",
+    "password": "123456",
+    "passwordConfirm": "123456",
+    "invalidPassword": "abcdef"
+  }
+
 }
