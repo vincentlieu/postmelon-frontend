@@ -108,4 +108,8 @@ code {
   background-position: center;
 }
 
+.nav-links {
+  text-decoration: none;
+  color: inherit;
+}
 

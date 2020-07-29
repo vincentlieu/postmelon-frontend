@@ -35,10 +35,9 @@ const Home = () => {
 
   return (
     <Container maxWidth="sm">
-      <h1>Home {userID}</h1>
+      <h1>Home</h1>
       <CreatePost />
       <>{!isLoading ? renderPosts() : renderLoading()}</>
-      {/* {sessionStorage.removeItem("token") */}
     </Container>
   );
 };
