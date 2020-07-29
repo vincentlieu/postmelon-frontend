@@ -42,8 +42,8 @@ function Login({ history }) {
         placeholder="Email"
         type="text"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}/>
-  
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
       <br></br>
       <TextField
@@ -51,9 +51,11 @@ function Login({ history }) {
         placeholder="Password"
         type="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}/>
-        <br></br><br></br>
-      <button className='login-button' onClick={sendRequestToLogIn}>
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <br></br>
+      <br></br>
+      <button className="login-button" onClick={sendRequestToLogIn}>
         Login
       </button>
       {errorMessage && <div className="error-message"> {errorMessage} </div>}
