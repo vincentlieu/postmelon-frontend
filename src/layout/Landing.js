@@ -76,6 +76,8 @@ const Landing = ({ history }) => {
             Linda Ojinnaka, Patricia Pavia & Vincent Lieu
             <br />
             <Link
+              target='_blank'
+              rel='noopener'
               color='inherit'
               href='https://github.com/vincentlieu/postmelon-frontend'>
               <GitHubIcon />
