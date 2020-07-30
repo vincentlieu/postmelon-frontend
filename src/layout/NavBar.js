@@ -182,7 +182,7 @@ const NavigationBar = () => {
                 <IconButton color="inherit" component={LinkToHome}>
                   <HomeIcon />
                 </IconButton>
-                <IconButton onClick={handleProfileMenuOpen} color="inherit">
+                <IconButton onClick={handleProfileMenuOpen} color="inherit" className='hello'>
                   <AccountCircle />
                 </IconButton>
               </div>

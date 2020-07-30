@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
-import baseurl from "../api/localAPI";
 import { useGlobalState } from "../config/GlobalState";
 import localAPI from "../api/localAPI";
 import { useParams } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import ShowPost from "../components/posts/ShowPost";
 import Moment from "react-moment";
+import { Container, Box, Paper, Typography, Modal, IconButton, Button, Divider, Tooltip } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import PeopleIcon from '@material-ui/icons/People';
+import PostsIcon from '@material-ui/icons/RateReview';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
-function Profile() {
+const Profile = () => {
   const { store } = useGlobalState();
-  const { posts } = store;
+  const { posts, userID } = store;
   const [userDetails, setUserDetails] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
   const [isDelete, setIsdelete] = useState(false);
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
 
   let { id } = useParams();
   const userPosts = posts.filter((post) => {
@@ -25,13 +32,54 @@ function Profile() {
         const response = await localAPI.get(`/users/${id}`);
         setUserDetails(response.data);
         setUserFriends(response.data.friends);
-
-        console.log(response.data);
       })();
     } catch (e) {
       console.log(e);
     }
   }, []);
+
+  function getModalStyle() {
+    const top = 50;
+    const left = 50;
+
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }
+
+    const handleOpen = () => {
+      setOpen(true);
+    };
+
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      position: 'absolute',
+      width: 400,
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
+  }));
+
+  const classes = useStyles();
+  
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      {userFriends.map((friend) => (
+        <div>
+          {friend.name}
+          <Divider/>
+        </div>
+      ))}
+    </div>
+  );
 
   const removeUser = () => {
     try {
@@ -54,106 +102,84 @@ function Profile() {
     }
   };
 
-  // const removefriend = () => {
-  //   try {
-  //     (async () => {
-  //       const response = await localAPI.put(`/users/unfriend/${id}`);
-  //     })();
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
-  return userDetails && userFriends ? (
-    <div className="container">
-      <div className="card">
-        <div className="row">
-          <div className="col-md">
-            <img
-              className=" display-img img-thumbnail rounded mx-auto d-block"
-              src={userDetails.avatar}
-              alt="profile image "
-            ></img>
-          </div>
-          <div className="col-md">
-            <div className="card-body">
-              <h3 className="card-title">{userDetails.name}</h3>
-              <p className="card-text">About Me: {userDetails.bio}</p>
-              <p className="card-text">
-                <span className="font-weight-bold">Join Dated:</span>&nbsp;
-                <Moment format="YYYY/MM/DD">{userDetails.date}</Moment>
-              </p>
-
-              <div className="row">
-                <div className="col-md">
-                  <p>Posts:{userPosts.length}</p>
-                </div>
-
-                <div className="col-md">
-                  <p>Likes</p>
-                </div>
-                <div className="col-md">
-                  <div className="dropdown">
-                    <button
-                      className=" btn btn-secondary background-color dropdown-toggle btn "
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      <p className="text-white">Friends:{userFriends.length}</p>
-                    </button>
-                    <div
-                      className="dropdown-menu"
-                      aria-labelledby="dropdownMenuButton"
-                    >
-                      <a className="dropdown-item" href="#">
-                        <div>
-                          {userFriends.map((friend) => (
-                            <div>{friend.name}</div>
-                          ))}
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md align-self-center mr-3 ">
-            <button
-              onClick={addfriend}
-              type="button"
-              className=" btn btn-secondary background-color text-white"
-            >
-              add friend
-            </button>
-          </div>
-          <div className="col-md align-self-center mr-3 ">
-            <button
-              onClick={removeUser}
-              type="button"
-              className="btn btn-secondary background-color text-white"
-            >
-              <i class="fa fa-trash-o"></i> Account
-            </button>
-          </div>
-        </div>
-      </div>
-
+  return (
+    <Container
+      className='profile-container'
+      maxWidth='sm'
+      disableGutters={true}>
+      <Paper className='profile-pic-info'>
+        <img src={userDetails.avatar} alt='profile image' />
+        <Box className='profile-info'>
+          <Box className='name-add'>
+            <Typography variant='h6' color='primary' className='card-title'>
+              {userDetails.name}
+            </Typography>
+            {/* SHOW ADD FRIEND BUTTON WHEN THE PROFILE IS NOT THE LOGGED IN USER */}
+            {userID != id ? (
+              <Tooltip title="Add friend">
+              <IconButton
+                onClick={addfriend}
+                type='button'
+                className=' btn btn-secondary background-color text-white'>
+                <PersonAddIcon />
+                </IconButton>
+                </Tooltip>
+            ) : (
+                <Tooltip title="Delete account">
+              <IconButton
+                className='add-friends-remove-account'
+                onClick={removeUser}>
+                <DeleteForeverIcon />
+                </IconButton>
+                </Tooltip>
+            )}
+          </Box>
+          <Typography variant='subtitle2' className='font-weight-bold'>
+            Joined: <Moment format='YYYY/MM/DD'>{userDetails.date}</Moment>
+          </Typography>
+          <Box className='post-likes-counter' alignSelf='flex-end'>
+            <Button
+              className='display-posts-count'
+              color='primary'
+              startIcon={<PostsIcon />}>
+              {userPosts.length}
+            </Button>
+            <Tooltip title='View friends list'>
+            <Button
+              onClick={handleOpen}
+              startIcon={<PeopleIcon />}
+              color='primary'>
+              {userFriends.length}
+            </Button>
+          </Tooltip>
+          </Box>
+          <Typography>
+            {userDetails.bio ? (
+              userDetails.bio
+            ) : (
+              <Typography variant='subtitle1'>
+                No biography specified.
+              </Typography>
+            )}
+          </Typography>
+        </Box>
+      </Paper>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='simple-modal-title'
+        aria-describedby='simple-modal-description'>
+        {body}
+      </Modal>
       <div>
         {userPosts.map((post) => {
           return <ShowPost post={post} />;
         })}
+        {isDelete && <Redirect to='/'></Redirect>}
       </div>
-      {isDelete && <Redirect to="/"></Redirect>}
-    </div>
-  ) : (
-    <div>
-      <h1>No profile for this user</h1>
-    </div>
+    </Container>
   );
 }
+
 
 export default Profile;
