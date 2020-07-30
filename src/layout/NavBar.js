@@ -83,7 +83,7 @@ const NavigationBar = () => {
   const handleLogout = () => {
     sessionStorage.clear();
     dispatch({ type: "setToken", data: null });
-    dispatch({ type: "getUserId", data: null });
+    dispatch({ type: "getUserID", data: null });
 
     history.push("/");
     handleMenuClose();
@@ -103,22 +103,23 @@ const NavigationBar = () => {
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMenuOpen}
-      onClose={handleMenuClose}>
-      <MenuItem className='view-myprofile' onClick={handleMenuClose}>
-        <Link to={`/profile/${userID}`} className='nav-links'>
+      onClose={handleMenuClose}
+    >
+      <MenuItem className="view-myprofile" onClick={handleMenuClose}>
+        <Link to={`/profile/${userID}`} className="nav-links">
           Profile
         </Link>
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <Link to='/editprofile' className='nav-links'>
+        <Link to="/editprofile" className="nav-links">
           Settings
         </Link>
       </MenuItem>
-      <MenuItem className='signout-button' onClick={handleLogout}>
+      <MenuItem className="signout-button" onClick={handleLogout}>
         Log out
       </MenuItem>
     </Menu>
