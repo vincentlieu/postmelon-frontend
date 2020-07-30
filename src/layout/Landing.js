@@ -7,11 +7,11 @@ import {
   Paper,
   Link,
   Avatar,
-  Button
+  Button,
+  Typography
 } from '@material-ui/core';
-
+import GitHubIcon from '@material-ui/icons/GitHub';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -70,6 +70,15 @@ const Landing = ({ history }) => {
           </Box>
           {(renderRegister && <Register />) ||
             (renderLogin && <Login history={history} />)}
+        </Box>
+        <Box>
+          <Typography variant='body2' color='textSecondary' align='center'>
+            Linda Ojinnaka, Patricia Pavia & Vincent Lieu
+             <br />
+            <Link color='inherit' href='https://material-ui.com/'>
+              <GitHubIcon />
+            </Link>
+          </Typography>
         </Box>
       </Grid>
     </Grid>

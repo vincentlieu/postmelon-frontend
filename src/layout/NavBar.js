@@ -14,7 +14,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useGlobalState } from "../config/GlobalState";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -90,17 +90,12 @@ const NavigationBar = () => {
   };
 
   // ALLOW MATERIAL-UI TO USE REACT-ROUTER-DOM
-  // LINKS TO PROFILE
-  const LinkToProfile = forwardRef((props, ref) => (
-    <RouterLink ref={ref} to={`/profile/${userID}`} {...props}></RouterLink>
-  ));
-
   //LINKS TO HOME - IF USERID IS NOT PRESENT AND USER CLICKS ON POSTMELON LOGO. IT WILL REDIRECT TO LANDING.
   const LinkToHome = forwardRef((props, ref) =>
     userID ? (
-      <RouterLink ref={ref} to={`/home`} {...props}></RouterLink>
+      <Link to={`/home`} {...props}></Link>
     ) : (
-      <RouterLink ref={ref} to={`/`} {...props}></RouterLink>
+      <Link to={`/`} {...props}></Link>
     )
   );
 
@@ -122,7 +117,9 @@ const NavigationBar = () => {
         Profile
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
-        <RouterLink to="/editprofile">Settings </RouterLink>
+        <Link to="/editprofile" className="nav-links">
+          Settings
+        </Link>
       </MenuItem>
       <MenuItem className="signout-button" onClick={handleLogout}>
         Log out
@@ -146,18 +143,21 @@ const NavigationBar = () => {
         </IconButton>
         <p>Home</p>
       </MenuItem>
-      <MenuItem component={LinkToProfile}>
+      <MenuItem>
         <IconButton color="inherit">
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <Link to={`/profile/${userID}`} className="nav-links">
+          Profile
+        </Link>
       </MenuItem>
       <MenuItem>
         <IconButton color="inherit">
           <SettingsIcon />
         </IconButton>
-
-        <p>Settings</p>
+        <Link to="/editprofile" className="nav-links">
+          Settings
+        </Link>
       </MenuItem>
       <MenuItem onClick={handleLogout}>
         <IconButton color="inherit">
