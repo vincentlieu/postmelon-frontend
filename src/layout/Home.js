@@ -12,16 +12,22 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    localAPI
-      .get("/posts/")
-      .then((posts) => {
-        dispatch({
-          type: "setPosts",
-          data: posts.data,
-        });
-      })
-      .then(setIsLoading(!isLoading));
+    if (posts.length > 0) {
+      setIsLoading(false);
+    }
   }, []);
+
+  // useEffect(() => {
+  //   localAPI
+  //     .get("/posts/")
+  //     .then((posts) => {
+  //       dispatch({
+  //         type: "setPosts",
+  //         data: posts.data,
+  //       });
+  //     })
+  //     .then(setIsLoading(!isLoading));
+  // }, []);
 
   function renderPosts() {
     return posts

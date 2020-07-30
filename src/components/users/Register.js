@@ -73,7 +73,7 @@ function Register() {
       />
       <TextField
         fullWidth={true}
-        className="password"
+        className="#password"
         margin="normal"
         placeholder="Password"
         type="password"

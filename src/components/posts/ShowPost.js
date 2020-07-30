@@ -85,7 +85,7 @@ const ShowPost = ({ post, deletePost, userID }) => {
             />
             <Box className={classes.postTime}>
               <Link
-                className="view-profile"
+                className=" view-profile"
                 component={LinkBehaviour}
                 variant="h6"
                 underline="none"
@@ -98,7 +98,8 @@ const ShowPost = ({ post, deletePost, userID }) => {
             </Box>
           </Box>
           {/* POSTHEADER - MENU OPTIONS - EDIT AND DELETE POST */}
-          <Box className={classes.postMenu}>
+
+          <Box data-cy="post-menu" className={classes.postMenu}>
             {editPostFlag && (
               <Box className={classes.postMenu}>
                 <EditPost

@@ -83,7 +83,7 @@ const NavigationBar = () => {
   const handleLogout = () => {
     sessionStorage.clear();
     dispatch({ type: "setToken", data: null });
-    dispatch({ type: "getUserId", data: null });
+    dispatch({ type: "getUserID", data: null });
 
     history.push("/");
     handleMenuClose();
@@ -112,7 +112,7 @@ const NavigationBar = () => {
       <MenuItem
         className="view-myprofile"
         onClick={handleMenuClose}
-        component={LinkToProfile}
+        // component={LinkToProfile}
       >
         Profile
       </MenuItem>

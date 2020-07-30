@@ -9,7 +9,8 @@ import Moment from "react-moment";
 
 function Profile() {
   const { store } = useGlobalState();
-  const { posts } = store;
+  const { userID, posts } = store;
+
   const [userDetails, setUserDetails] = useState([]);
   const [userFriends, setUserFriends] = useState([]);
   const [isDelete, setIsdelete] = useState(false);
@@ -26,6 +27,7 @@ function Profile() {
         const response = await localAPI.get(`/users/${id}`);
         setUserDetails(response.data);
         setUserFriends(response.data.friends);
+        console.log(id);
 
         console.log(response.data);
       })();
@@ -145,7 +147,7 @@ function Profile() {
 
       <div>
         {userPosts.map((post) => {
-          return <ShowPost post={post} />;
+          return <ShowPost userID={userID} post={post} />;
         })}
       </div>
       {isDelete && <Redirect to="/"></Redirect>}

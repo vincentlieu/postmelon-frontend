@@ -1,4 +1,5 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
+import localAPI from "./api/localAPI";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./layout/Home";
 import Landing from "./layout/Landing";
@@ -19,6 +20,16 @@ function App() {
     userID: sessionStorage.userId || null,
   };
   const [store, dispatch] = useReducer(stateReducer, initialState);
+
+  useEffect(() => {
+    localAPI.get("/posts/").then((posts) => {
+      dispatch({
+        type: "setPosts",
+        data: posts.data,
+      });
+    });
+    // .then(setIsLoading(!isLoading));
+  }, []);
 
   return (
     <Box>
