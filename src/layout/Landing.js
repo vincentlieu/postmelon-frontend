@@ -74,8 +74,10 @@ const Landing = ({ history }) => {
         <Box>
           <Typography variant='body2' color='textSecondary' align='center'>
             Linda Ojinnaka, Patricia Pavia & Vincent Lieu
-             <br />
-            <Link color='inherit' href='https://material-ui.com/'>
+            <br />
+            <Link
+              color='inherit'
+              href='https://github.com/vincentlieu/postmelon-frontend'>
               <GitHubIcon />
             </Link>
           </Typography>
