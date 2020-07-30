@@ -37,7 +37,7 @@ const Profile = () => {
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  }, [id]);
 
   function getModalStyle() {
     const top = 50;
