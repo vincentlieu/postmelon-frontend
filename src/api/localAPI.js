@@ -1,9 +1,5 @@
 import axios from "axios";
 
-{
-  /* {sessionStorage.removeItem("token") */
-  // this is to use when we create log out button
-}
 const localAPI = axios.create({
   baseURL: "https://postmelon.herokuapp.com/api/",
 });
