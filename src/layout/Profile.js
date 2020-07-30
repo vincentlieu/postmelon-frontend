@@ -15,6 +15,7 @@ function Profile() {
   const [isDelete, setIsdelete] = useState(false);
 
   let { id } = useParams();
+
   const userPosts = posts.filter((post) => {
     return post.authorId === id;
   });
@@ -134,7 +135,7 @@ function Profile() {
             <button
               onClick={removeUser}
               type="button"
-              className="btn btn-secondary background-color text-white"
+              className=" delete-account btn btn-secondary background-color text-white"
             >
               <i class="fa fa-trash-o"></i> Account
             </button>

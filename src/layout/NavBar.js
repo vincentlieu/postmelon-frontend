@@ -114,13 +114,19 @@ const NavigationBar = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose} component={LinkToProfile}>
+      <MenuItem
+        className="view-myprofile"
+        onClick={handleMenuClose}
+        component={LinkToProfile}
+      >
         Profile
       </MenuItem>
       <MenuItem onClick={handleMenuClose}>
         <RouterLink to="/editprofile">Settings </RouterLink>
       </MenuItem>
-      <MenuItem onClick={handleLogout}>Log out</MenuItem>
+      <MenuItem className="signout-button" onClick={handleLogout}>
+        Log out
+      </MenuItem>
     </Menu>
   );
 
@@ -182,7 +188,11 @@ const NavigationBar = () => {
                 <IconButton color="inherit" component={LinkToHome}>
                   <HomeIcon />
                 </IconButton>
-                <IconButton onClick={handleProfileMenuOpen} color="inherit">
+                <IconButton
+                  className="drop-down"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
                   <AccountCircle />
                 </IconButton>
               </div>
