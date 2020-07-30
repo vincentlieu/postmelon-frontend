@@ -41,11 +41,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-  postMenu: {
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
+
   postOptions: {
     display: "flex",
     justifyContent: "space-around",
@@ -98,9 +94,9 @@ const ShowPost = ({ post, deletePost, userID }) => {
             </Box>
           </Box>
           {/* POSTHEADER - MENU OPTIONS - EDIT AND DELETE POST */}
-          <Box className={classes.postMenu}>
+          <Box className="post-menu">
             {editPostFlag && (
-              <Box className={classes.postMenu}>
+              <Box>
                 <EditPost
                   value={newPostContent}
                   postId={post._id}
@@ -125,6 +121,8 @@ const ShowPost = ({ post, deletePost, userID }) => {
         {/* POSTBODY - CONTENT */}
         {editPostFlag ? (
           <TextField
+            className="post-input"
+            autoFocus={true}
             fullWidth={true}
             multiline={true}
             variant="outlined"
