@@ -22,6 +22,7 @@ const Profile = () => {
   const [open, setOpen] = React.useState(false);
 
   let { id } = useParams();
+
   const userPosts = posts.filter((post) => {
     return post.authorId === id;
   });
@@ -96,13 +97,14 @@ const Profile = () => {
     try {
       (async () => {
         const response = await localAPI.put(`/users/friend/${id}`);
+        console.log(response)
       })();
     } catch (e) {
       console.log(e);
     }
   };
 
-  return (
+  return userDetails && userFriends ? (
     <Container
       className='profile-container'
       maxWidth='sm'
@@ -166,19 +168,21 @@ const Profile = () => {
       </Paper>
       <Modal
         open={open}
-        onClose={handleClose}
-        aria-labelledby='simple-modal-title'
-        aria-describedby='simple-modal-description'>
+        onClose={handleClose}>
         {body}
       </Modal>
+      
       <div>
         {userPosts.map((post) => {
-          return <ShowPost post={post} />;
+          return <ShowPost post={post} userID={userID}/>;
         })}
         {isDelete && <Redirect to='/'></Redirect>}
       </div>
-    </Container>
-  );
+    </Container> ) : (
+    <div>
+      <h1>No profile for this user</h1>
+    </div>
+  )
 }
 
 

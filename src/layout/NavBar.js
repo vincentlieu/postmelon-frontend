@@ -108,7 +108,7 @@ const NavigationBar = () => {
       transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       open={isMenuOpen}
       onClose={handleMenuClose}>
-      <MenuItem onClick={handleMenuClose}>
+      <MenuItem className='view-myprofile' onClick={handleMenuClose}>
         <Link to={`/profile/${userID}`} className='nav-links'>
           Profile
         </Link>
@@ -118,7 +118,9 @@ const NavigationBar = () => {
           Settings
         </Link>
       </MenuItem>
-      <MenuItem onClick={handleLogout}>Log out</MenuItem>
+      <MenuItem className='signout-button' onClick={handleLogout}>
+        Log out
+      </MenuItem>
     </Menu>
   );
 
@@ -126,35 +128,36 @@ const NavigationBar = () => {
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
       keepMounted
-      transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}>
+      onClose={handleMobileMenuClose}
+    >
       <MenuItem component={LinkToHome}>
-        <IconButton color='inherit'>
+        <IconButton color="inherit">
           <HomeIcon />
         </IconButton>
         <p>Home</p>
       </MenuItem>
       <MenuItem>
-        <IconButton color='inherit'>
+        <IconButton color="inherit">
           <AccountCircle />
         </IconButton>
-        <Link to={`/profile/${userID}`} className='nav-links'>
+        <Link to={`/profile/${userID}`} className="nav-links">
           Profile
         </Link>
       </MenuItem>
       <MenuItem>
-        <IconButton color='inherit'>
+        <IconButton color="inherit">
           <SettingsIcon />
         </IconButton>
-        <Link to='/editprofile' className='nav-links'>
+        <Link to="/editprofile" className="nav-links">
           Settings
         </Link>
       </MenuItem>
       <MenuItem onClick={handleLogout}>
-        <IconButton color='inherit'>
+        <IconButton color="inherit">
           <ExitToAppIcon />
         </IconButton>
         <p>Log off</p>
@@ -182,7 +185,11 @@ const NavigationBar = () => {
                 <IconButton color="inherit" component={LinkToHome}>
                   <HomeIcon />
                 </IconButton>
-                <IconButton onClick={handleProfileMenuOpen} color="inherit" className='hello'>
+                <IconButton
+                  className="drop-down"
+                  onClick={handleProfileMenuOpen}
+                  color="inherit"
+                >
                   <AccountCircle />
                 </IconButton>
               </div>

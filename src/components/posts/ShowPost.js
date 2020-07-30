@@ -84,7 +84,12 @@ const ShowPost = ({ post, deletePost, userID }) => {
               className={classes.postAuthor}
             />
             <Box className={classes.postTime}>
-              <Link component={LinkBehaviour} variant="h6" underline="none">
+              <Link
+                className="view-profile"
+                component={LinkBehaviour}
+                variant="h6"
+                underline="none"
+              >
                 {post.name}
               </Link>
               <Typography variant="subtitle2">

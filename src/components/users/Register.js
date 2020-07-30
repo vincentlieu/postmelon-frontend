@@ -19,7 +19,7 @@ function Register() {
     } else if (email === "") {
       SetErrorMessage("Email can not be emty");
     } else if (password === "") {
-      SetErrorMessage("Password can not be emty");
+      SetErrorMessage("Password can not be empty");
     } else if (password !== confirmPassword) {
       SetErrorMessage("Password does not matched");
     } else {
@@ -52,58 +52,55 @@ function Register() {
   };
 
   return (
-    <Box className='registration-login-container'>
+    <Box className="registration-login-container">
       <TextField
         fullWidth={true}
-        className='name'
-        margin='normal'
-        className='registration-field'
-        placeholder='Full name'
-        type='text'
+        className="name"
+        margin="normal"
+        placeholder="Full name"
+        type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <TextField
         fullWidth={true}
-        className='register-email'
-        margin='normal'
-        className='registration-field'
-        placeholder='Email address'
-        type='text'
+        className="register-email"
+        margin="normal"
+        placeholder="Email address"
+        type="text"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
         fullWidth={true}
-        className='register-email'
-        margin='normal'
-        className='registration-field'
-        placeholder='Password'
-        type='password'
+        className="password"
+        margin="normal"
+        placeholder="Password"
+        type="password"
         value={password}
         onChange={(e) => setpassword(e.target.value)}
-      />{' '}
+      />{" "}
       <TextField
         fullWidth={true}
-        className='confirm-password'
-        margin='normal'
-        className='registration-field'
-        placeholder='Password confirmation'
-        type='password'
+        className="confirm-password"
+        margin="normal"
+        placeholder="Password confirmation"
+        type="password"
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
       <Button
-        className='register-button'
+        className="register-button"
         onClick={createUser}
         fullWidth={true}
-        color='primary'
-        variant='contained'>
+        color="primary"
+        variant="contained"
+      >
         <b>Register</b>
       </Button>
-      {isCreated && <Redirect to='/home'></Redirect>}
+      {isCreated && <Redirect to="/home"></Redirect>}
       {errorMessage && (
-        <Box className='error-message-register'> {errorMessage} </Box>
+        <Box className="error-message-register"> {errorMessage} </Box>
       )}
     </Box>
   );
