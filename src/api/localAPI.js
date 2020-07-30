@@ -5,7 +5,7 @@ import axios from "axios";
   // this is to use when we create log out button
 }
 const localAPI = axios.create({
-  baseURL: "http://localhost:5000/api/",
+  baseURL: "https://postmelon.herokuapp.com/api/",
 });
 
 localAPI.interceptors.request.use((request) => {

@@ -1,9 +1,9 @@
-import React from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import DeletePost from './DeletePost';
+import React from "react";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import DeletePost from "./DeletePost";
 
 const PostMenu = ({ editPost, postId }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,32 +20,35 @@ const PostMenu = ({ editPost, postId }) => {
   return (
     <div>
       <IconButton
-        aria-label='more'
-        aria-controls='long-menu'
-        aria-haspopup='true'
-        onClick={handleClick}>
+        className="post-dropdown-menu-btn"
+        aria-label="more"
+        aria-controls="long-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
         <MoreVertIcon />
       </IconButton>
       <Menu
         anchorEl={anchorEl}
         getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
+          vertical: "top",
+          horizontal: "center",
         }}
         open={open}
-        onClose={handleClose}>
-        <MenuItem key={'option'} onClick={editPost}>
-                  Edit Post
+        onClose={handleClose}
+      >
+        <MenuItem className="update-post" key={"option"} onClick={editPost}>
+          Edit Post
         </MenuItem>
-              <DeletePost postId={postId}/>
+        <DeletePost postId={postId} />
       </Menu>
     </div>
   );
-}
+};
 
-export default PostMenu
+export default PostMenu;

@@ -7,7 +7,7 @@
   },
   "registration": {
     "name": "Cypress Test",
-    "email": "cypresstest@postmelontest.com",
+    "email": "cypresstest1@postmelontest.com",
     "password": "123456",
     "passwordConfirm": "123456",
     "invalidPassword": "abcdef"

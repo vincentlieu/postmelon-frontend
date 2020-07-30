@@ -89,7 +89,7 @@ code {
 }
 
 .name {
-  margin-top:20rem;
+  margin-top: 20rem;
 }
 
 .register-email {
@@ -97,13 +97,13 @@ code {
 }
 
 .registration-login-container {
-  display: 'flex';
-  flex-direction: 'column';
+  display: "flex";
+  flex-direction: "column";
   width: 50%;
 }
 
 .landing-image {
-  background-image: url('../src/assets/postmelon8.jpg');
+  background-image: url("../src/assets/postmelon8.jpg");
   background-size: cover;
   background-position: center;
 }
@@ -136,5 +136,10 @@ code {
 }
 
 .display-posts-count {
-    pointer-events: none;
+  pointer-events: none;
+}
+.post-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
